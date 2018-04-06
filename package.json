@@ -1,7 +1,7 @@
 {
-  "name": "react-testing-library",
+  "name": "preact-testing-library",
   "version": "0.0.0-semantically-released",
-  "description": "Simple and complete React DOM testing utilities that encourage good testing practices.",
+  "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
   "main": "dist/index.js",
   "typings": "typings/index.d.ts",
   "engines": {
@@ -23,7 +23,7 @@
   ],
   "keywords": [
     "testing",
-    "react",
+    "preact",
     "ui",
     "dom",
     "jsdom",
@@ -33,33 +33,23 @@
     "end-to-end",
     "e2e"
   ],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "Anto Aravinth",
   "license": "MIT",
   "dependencies": {
     "dom-testing-library": "^1.0.0",
     "wait-for-expect": "0.4.0"
   },
   "devDependencies": {
-    "@types/react-dom": "^16.0.4",
     "axios": "^0.18.0",
     "history": "^4.7.2",
     "jest-in-case": "^1.0.2",
     "kcd-scripts": "^0.36.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-transition-group": "^2.2.1",
-    "redux": "^3.7.2"
-  },
-  "peerDependencies": {
-    "react-dom": "*"
+    "preact": "^8.2.7",
+    "react": "^16.3.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
     "rules": {
-      "react/prop-types": "off",
       "import/no-unassigned-import": "off"
     }
   },
@@ -70,10 +60,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kentcdodds/react-testing-library.git"
+    "url": "git+https://github.com/antoaravinth/preact-testing-library"
   },
   "bugs": {
-    "url": "https://github.com/kentcdodds/react-testing-library/issues"
+    "url": "https://github.com/antoaravinth/preact-testing-library/issues"
   },
-  "homepage": "https://github.com/kentcdodds/react-testing-library#readme"
+  "homepage": "https://github.com/antoaravinth/preact-testing-library#readme"
 }

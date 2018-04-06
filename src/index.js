@@ -1,9 +1,8 @@
-import ReactDOM from 'react-dom'
-import {Simulate} from 'react-dom/test-utils'
+import {render as renderPReact, h, Component} from 'preact'
 import {queries, wait} from 'dom-testing-library'
 
 function render(ui, {container = document.createElement('div')} = {}) {
-  ReactDOM.render(ui, container)
+  renderPReact(ui, container)
   const containerHelpers = Object.entries(queries).reduce(
     (helpers, [key, fn]) => {
       helpers[key] = fn.bind(null, container)
@@ -11,11 +10,12 @@ function render(ui, {container = document.createElement('div')} = {}) {
     },
     {},
   )
+
   return {
     container,
-    unmount: () => ReactDOM.unmountComponentAtNode(container),
+    unmount: () => renderPReact(null, document.body, container),
     ...containerHelpers,
   }
 }
 
-export {render, Simulate, wait}
+export {render, wait, h, Component}
