@@ -5,7 +5,7 @@ import 'dom-testing-library/extend-expect'
 /*eslint-disable */
 // lets order jest that we are using Preact here.
 /** @jsx preact.h */
-class TodoList extends preact.Component {
+class HelloPreact extends preact.Component {
   render() {
     return <div>Hello world</div>
   }
@@ -13,7 +13,7 @@ class TodoList extends preact.Component {
 /*eslint-disable */
 
 test('simple preact component', () => {
-  const {getByText, queryByText, unmount} = render(<TodoList />)
+  const {getByText, queryByText, unmount} = render(<HelloPreact />)
 
   expect(getByText('Hello world')).toBeInTheDOM()
   expect(queryByText('No Hello world')).not.toBeInTheDOM()
