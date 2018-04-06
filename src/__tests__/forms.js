@@ -2,7 +2,8 @@ import preact from 'preact' // eslint-disable-line
 import {render, Simulate} from '../'
 import 'dom-testing-library/extend-expect'
 
-//Quick check on testing the
+//Quick check on testing the stateless preact component
+//along with few events
 /*eslint-disable */
 /** @jsx preact.h */
 function Login({onSubmit}) {
