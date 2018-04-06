@@ -13,7 +13,12 @@ Simple and complete PReact DOM testing utilities that encourage good testing pra
 This is a simple clone of React Test Library https://github.com/kentcdodds/react-testing-library
 
 TODO:
+The following are the pending items.
 
 1.  Add readme
-2.  Add examples
+2.  Add examples Specifically to:
+    1.  Preact Redux
+    2.  Preact animations
+    3.  Preact events
+    4.  Preact router if any!
 3.  FAQ similar to React testing library
