@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+        "targets": { "node": "8" }
+    }]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime"],
+    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-transform-react-jsx", { "pragma": "h" }],
+    ["@babel/plugin-transform-modules-commonjs", {"allowTopLevelThis": true}]
+  ]
+}

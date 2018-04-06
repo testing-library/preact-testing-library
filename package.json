@@ -1,0 +1,125 @@
+{
+  "name": "preact-testing-library-next",
+  "version": "0.0.0-semantically-released",
+  "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "license": "MIT",
+  "author": "Rahim Alwer <rahim_alwer@hotmail.com>",
+  "homepage": "https://github.com/mihar-22/preact-testing-library#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mihar-22/preact-testing-library"
+  },
+  "bugs": {
+    "url": "https://github.com/mihar-22/preact-testing-library/issues"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
+  "keywords": [
+    "testing",
+    "preact",
+    "ui",
+    "dom",
+    "jsdom",
+    "unit",
+    "integration",
+    "functional",
+    "end-to-end",
+    "e2e"
+  ],
+  "files": [
+    "dist",
+    "dont-cleanup-after-each.js",
+    "pure.js",
+    "types/index.d.ts"
+  ],
+  "scripts": {
+    "toc": "npx doctoc README.md",
+    "lint": "eslint src/**/*.js --fix",
+    "build": " npx babel src --out-dir dist --ignore '**/__tests__/**,**/__mocks__/**'",
+    "test": "jest src/__tests__ ",
+    "test:watch": "yarn test --watch",
+    "test:update": "yarn test --updateSnapshot --coverage",
+    "setup": "yarn && yarn validate",
+    "validate": "npm-run-all lint test:update build",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "@testing-library/dom": "^6.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@testing-library/jest-dom": "^4.1.0",
+    "@types/jest": "^24.0.18",
+    "all-contributors-cli": "^6.9.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "codecov": "^3.5.0",
+    "doctoc": "^1.4.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-simple-import-sort": "^4.0.0",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "jest-watch-typeahead": "^0.4.0",
+    "lint-staged": "^9.2.5",
+    "npm-run-all": "^4.1.5",
+    "preact": "^10.0.0-rc.1",
+    "preact-portal": "^1.1.3",
+    "prettier": "^1.18.2",
+    "semantic-release": "^15.13.24"
+  },
+  "peerDependencies": {
+    "preact": ">=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "README.md": [
+      "yarn toc",
+      "prettier --parser markdown --write",
+      "git add"
+    ],
+    ".all-contributorsrc": [
+      "yarn contributors:generate",
+      "git add"
+    ],
+    "**/*.js": [
+      "yarn lint",
+      "yarn test:update",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^react$": "preact/compat",
+      "^react-dom$": "preact/compat"
+    },
+    "watchPlugins": [
+      "typeahead/filename",
+      "typeahead/testname"
+    ]
+  }
+}
