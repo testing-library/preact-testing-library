@@ -1,5 +1,5 @@
 import preact from 'preact' // eslint-disable-line
-import {render, Simulate} from '../'
+import {render, FireEvent} from '../'
 import 'dom-testing-library/extend-expect'
 
 //Quick check on testing the stateless preact component
@@ -54,7 +54,7 @@ test('login form submits', () => {
   // by clicking on the submit button. This is really unfortunate.
   // So the next best thing is to simulate a submit on the form itself
   // then ensure that there's a submit button.
-  Simulate.submit(formNode)
+  FireEvent.submit(formNode)
 
   // Assert
   expect(handleSubmit).toHaveBeenCalledTimes(1)

@@ -1,9 +1,9 @@
 // Simple util, that simulate events that can be
 // dispatched to the HTMLElement
-const Simulate = {
+const FireEvent = {
   submit: element => {
     element.dispatchEvent(new Event('submit'))
   },
 }
 
-export default Simulate
+export default FireEvent

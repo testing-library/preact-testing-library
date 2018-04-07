@@ -1,6 +1,6 @@
 import {render as renderPReact} from 'preact'
 import {queries, wait} from 'dom-testing-library'
-import Simulate from './simulate-util'
+import FireEvent from './event-util'
 
 function render(ui, {container = document.createElement('div')} = {}) {
   renderPReact(ui, container)
@@ -19,4 +19,4 @@ function render(ui, {container = document.createElement('div')} = {}) {
   }
 }
 
-export {render, wait, Simulate}
+export {render, wait, FireEvent}
