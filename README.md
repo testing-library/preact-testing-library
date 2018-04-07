@@ -6,10 +6,6 @@
 
 <hr />
 
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
-
 ## The problem
 
 You want to write maintainable tests for your PReact components. As a part of
@@ -142,7 +138,7 @@ testing what happens when your component is removed from the page (like testing
 that you don't leave event handlers hanging around causing memory leaks).
 
 > This method is a pretty small abstraction over
-> `renderPReact(ui, document.body, container)`
+> `render(ui, document.body, container)`
 
 ```javascript
 const {container, unmount} = render(<Login />)
@@ -242,8 +238,16 @@ const usernameInputElement = getByTestId('username-input')
 
 ### `FireEvent`
 
-This is a simple util that actually does a browser event. It uses `dispatchEvent` under the hood for
+This is a simple util that actually does trigger a actual DOM event. It uses `dispatchEvent` under the hood for
 firing event.
+
+The API is simple:
+
+```javascript
+FireEvent.fireEvent(element, event)
+```
+
+`event` can be `click`, `submit` etc. `element` is the actual DOM element where you want to disptach the event.
 
 ### `wait`
 
