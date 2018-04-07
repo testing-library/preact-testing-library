@@ -2,7 +2,6 @@ import preact from 'preact'
 import {render} from '../'
 import 'dom-testing-library/extend-expect'
 
-/*eslint-disable */
 // lets order jest that we are using Preact here.
 /** @jsx preact.h */
 class HelloPreact extends preact.Component {
@@ -10,7 +9,6 @@ class HelloPreact extends preact.Component {
     return <div>Hello world</div>
   }
 }
-/*eslint-disable */
 
 test('simple preact component', () => {
   const {getByText, queryByText, unmount} = render(<HelloPreact />)

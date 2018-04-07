@@ -92,10 +92,8 @@ You may also be interested in installing `dom-testing-library` so you can use
 
 ```javascript
 // __tests__/fetch.js
-import React from 'react'
-import {render, Simulate, wait} from 'react-testing-library'
-// this add custom expect matchers from dom-testing-library
-import 'dom-testing-library/extend-expect'
+import preact from 'preact'
+import {render, flushPromises, FireEvent} from '../'
 import axiosMock from 'axios' // the mock lives in a __mocks__ directory
 import Fetch from '../fetch' // see the tests for a full implementation
 
@@ -107,22 +105,20 @@ test('Fetch makes an API call and displays the greeting when load-greeting is cl
     }),
   )
   const url = '/greeting'
-  const {getByText, getByTestId, container} = render(<Fetch url={url} />)
+  const {getByText} = render(<Fetch url={url} />)
 
   // Act
-  Simulate.click(getByText('Load Greeting'))
+  FireEvent.fireEvent(getByText('Fetch'), 'click')
 
-  // let's wait for our mocked `get` request promise to resolve
-  // wait will wait until the callback doesn't throw an error
-  await wait(() => getByTestId('greeting-text'))
+  await flushPromises()
 
   // Assert
   expect(axiosMock.get).toHaveBeenCalledTimes(1)
   expect(axiosMock.get).toHaveBeenCalledWith(url)
-  expect(getByTestId('greeting-text')).toHaveTextContent('hello there')
-  expect(getByTestId('ok-button')).toHaveAttribute('disabled')
-  // snapshots work great with regular DOM nodes!
-  expect(container.firstChild).toMatchSnapshot()
+  // this assertion is funny because if the textContent were not "hello there"
+  // then the `getByText` would throw anyway... 🤔
+  expect(getByText('hello there').textContent).toBe('hello there')
+  // expect(container.firstChild).toMatchSnapshot()
 })
 ```
 
@@ -386,86 +382,6 @@ This is fairly common. Our first bit of advice is to try to get the default
 text used in your tests. That will make everything much easier (more than just
 using this utility). If that's not possible, then you're probably best
 to just stick with `data-testid`s (which is not bad anyway).
-
-</details>
-
-<details>
-
-<summary>How do I update the props of a rendered component?</summary>
-
-It'd probably be better if you test the component that's doing the prop updating
-to ensure that the props are being updated correctly (see
-[the Guiding Principles section](#guiding-principles)). That said, if you'd
-prefer to update the props of a rendered component in your test, the easiest
-way to do that is:
-
-```javascript
-const {container, getByTestId} = render(<NumberDisplay number={1} />)
-expect(getByTestId('number-display').textContent).toBe('1')
-
-// re-render the same component with different props
-// but pass the same container in the options argument.
-// which will cause a re-render of the same instance (normal preact behavior).
-render(<NumberDisplay number={2} />, {container})
-expect(getByTestId('number-display').textContent).toBe('2')
-```
-
-[Open the tests](https://github.com/antoaravinth/preact-testing-library/blob/master/src/__tests__/number-display.js)
-for a full example of this.
-
-</details>
-
-<details>
-
-<summary>If I can't use shallow rendering, how do I mock out components in tests?</summary>
-
-In general, you should avoid mocking out components (see
-[the Guiding Principles section](#guiding-principles)). However if you need to,
-then it's pretty trivial using
-[Jest's mocking feature](https://facebook.github.io/jest/docs/en/manual-mocks.html).
-One case that I've found mocking to be especially useful is for animation
-libraries. I don't want my tests to wait for animations to end.
-
-```javascript
-jest.mock('react-transition-group', () => {
-  const FakeTransition = jest.fn(({children}) => children)
-  const FakeCSSTransition = jest.fn(
-    props =>
-      props.in ? <FakeTransition>{props.children}</FakeTransition> : null,
-  )
-  return {CSSTransition: FakeCSSTransition, Transition: FakeTransition}
-})
-
-test('you can mock things with jest.mock', () => {
-  const {getByTestId, queryByTestId} = render(
-    <HiddenMessage initialShow={true} />,
-  )
-  expect(queryByTestId('hidden-message')).toBeTruthy() // we just care it exists
-  // hide the message
-  Simulate.click(getByTestId('toggle-message'))
-  // in the real world, the CSSTransition component would take some time
-  // before finishing the animation which would actually hide the message.
-  // So we've mocked it out for our tests to make it happen instantly
-  expect(queryByTestId('hidden-message')).toBeNull() // we just care it doesn't exist
-})
-```
-
-Note that because they're Jest mock functions (`jest.fn()`), you could also make
-assertions on those as well if you wanted.
-
-[Open full test](https://github.com/antoaravinth/preact-testing-library/blob/master/src/__tests__/mock.react-transition-group.js)
-for the full example.
-
-This looks like more work that shallow rendering (and it is), but it gives you
-more confidence so long as your mock resembles the thing you're mocking closly
-enough.
-
-If you want to make things more like shallow rendering, then you could do
-something more
-[like this](https://github.com/antoaravinth/preact-testing-library/blob/master/src/__tests__/shallow.react-transition-group.js).
-
-Learn more about how Jest mocks work from my blog post:
-["But really, what is a JavaScript mock?"](https://blog.kentcdodds.com/but-really-what-is-a-javascript-mock-10d060966f7d)
 
 </details>
 

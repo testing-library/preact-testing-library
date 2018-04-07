@@ -1,11 +1,9 @@
 import preact from 'preact' // eslint-disable-line
 import {render, FireEvent} from '../'
-import 'dom-testing-library/extend-expect'
+import 'dom-testing-library/extend-expect' // eslint-disable-line valid-jsdoc // eslint-disable-line
 
-//Quick check on testing the stateless preact component
-//along with few events
-/*eslint-disable */
 /** @jsx preact.h */
+
 function Login({onSubmit}) {
   return (
     <div>
@@ -33,7 +31,6 @@ function Login({onSubmit}) {
     </div>
   )
 }
-/*eslint-disable */
 
 test('login form submits', () => {
   const fakeUser = {username: 'jackiechan', password: 'hiya! 🥋'}
@@ -54,7 +51,7 @@ test('login form submits', () => {
   // by clicking on the submit button. This is really unfortunate.
   // So the next best thing is to simulate a submit on the form itself
   // then ensure that there's a submit button.
-  FireEvent.submit(formNode)
+  FireEvent.fireEvent(formNode, 'submit')
 
   // Assert
   expect(handleSubmit).toHaveBeenCalledTimes(1)
@@ -62,3 +59,5 @@ test('login form submits', () => {
   // make sure the form is submittable
   expect(submitButtonNode.type).toBe('submit')
 })
+
+/* eslint jsx-a11y/label-has-for:0 */

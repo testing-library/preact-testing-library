@@ -19,4 +19,10 @@ function render(ui, {container = document.createElement('div')} = {}) {
   }
 }
 
-export {render, wait, FireEvent}
+// this returns a new promise and is just a simple way to
+// wait until the next tick so resolved promises chains will continue
+function flushPromises() {
+  return new Promise(resolve => setImmediate(resolve))
+}
+
+export {render, wait, flushPromises, FireEvent}
