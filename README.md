@@ -249,6 +249,73 @@ FireEvent.fireEvent(element, event)
 
 `event` can be `click`, `submit` etc. `element` is the actual DOM element where you want to disptach the event.
 
+Examples of events are covered under [here](https://github.com/antoaravinth/preact-testing-library/blob/master/src/__tests__/events.js).
+
+Here is the common use cases of `FireEvent`, when especially working with forms:
+
+```javascript
+class MyForm extends preact.Component {
+  state = {checked: false, textbox: ''}
+  toggle = () => {
+    const checked = !this.state.checked
+    this.setState({checked})
+  }
+  type = e => {
+    const textbox = e.target.value
+    this.setState({textbox})
+  }
+  render({}, {checked, textbox}) {
+    return (
+      <div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              checked={checked}
+              onClick={this.toggle}
+              data-testid="checkbox"
+            />
+            Checkbox
+          </label>
+          <p>{checked ? 'Yes' : 'No'}</p>
+        </div>
+
+        <div>
+          <label>
+            <input
+              type="textbox"
+              checked={textbox}
+              onChange={this.type}
+              data-testid="textbox"
+            />
+            Textbox
+          </label>
+          <p>{textbox}</p>
+        </div>
+      </div>
+    )
+  }
+}
+
+test('testing different types of events', async () => {
+  const {getByTestId, getByText, queryByText} = render(<MyForm />)
+
+  const checkBox = getByTestId('checkbox')
+
+  // Act
+  FireEvent.fireEvent(checkBox, 'click')
+  const textbox = getByTestId('textbox')
+  textbox.value = 'test value'
+  FireEvent.fireEvent(textbox, 'change')
+
+  await flushPromises()
+  // Assert
+  expect(queryByText('No')).not.toBeInTheDOM()
+  expect(getByText('Yes')).toBeInTheDOM()
+  expect(getByText('test value')).toBeInTheDOM()
+})
+```
+
 ### `wait`
 
 Defined as:
