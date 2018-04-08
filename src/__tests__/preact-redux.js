@@ -77,6 +77,7 @@ function renderWithRedux(
   }
 }
 
+// TODO: These cases are failing in preact. Need to debug
 // test('can render with redux with defaults', () => {
 //   const {getByTestId, getByText} = renderWithRedux(<ConnectedCounter />)
 //   FireEvent.fireEvent(getByText('+'),'click')
