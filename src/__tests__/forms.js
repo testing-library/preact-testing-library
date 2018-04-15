@@ -1,5 +1,5 @@
 import preact from 'preact' // eslint-disable-line
-import {render, FireEvent} from '../'
+import {renderIntoDocument, fireEvent} from '../'
 import 'dom-testing-library/extend-expect' // eslint-disable-line valid-jsdoc // eslint-disable-line
 
 /** @jsx preact.h */
@@ -35,13 +35,12 @@ function Login({onSubmit}) {
 test('login form submits', () => {
   const fakeUser = {username: 'jackiechan', password: 'hiya! 🥋'}
   const handleSubmit = jest.fn()
-  const {container, getByLabelText, getByText} = render(
+  const {getByLabelText, getByText} = renderIntoDocument(
     <Login onSubmit={handleSubmit} />,
   )
 
   const usernameNode = getByLabelText('username')
   const passwordNode = getByLabelText('password')
-  const formNode = container.querySelector('form') // eslint-disable-line
   const submitButtonNode = getByText('submit')
 
   // Act
@@ -51,7 +50,7 @@ test('login form submits', () => {
   // by clicking on the submit button. This is really unfortunate.
   // So the next best thing is to simulate a submit on the form itself
   // then ensure that there's a submit button.
-  FireEvent.fireEvent(formNode, 'submit')
+  fireEvent.click(submitButtonNode)
 
   // Assert
   expect(handleSubmit).toHaveBeenCalledTimes(1)

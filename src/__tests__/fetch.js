@@ -1,6 +1,6 @@
 import preact from 'preact'
 import axiosMock from 'axios'
-import {render, flushPromises, FireEvent} from '../'
+import {render, flushPromises, fireEvent} from '../'
 
 /** @jsx preact.h */
 class Fetch extends preact.Component {
@@ -36,7 +36,7 @@ test('Fetch makes an API call and displays the greeting when load-greeting is cl
   const {getByText} = render(<Fetch url={url} />)
 
   // Act
-  FireEvent.fireEvent(getByText('Fetch'), 'click')
+  fireEvent.click(getByText('Fetch'))
 
   await flushPromises()
 

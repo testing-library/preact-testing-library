@@ -1,7 +1,7 @@
 import preact from 'preact'
 import {createStore} from 'redux'
 import {connect, Provider} from 'preact-redux'
-import {render, FireEvent} from '../'
+import {render, fireEvent} from '../'
 
 /** @jsx preact.h */
 class Counter extends preact.Component {
@@ -98,8 +98,8 @@ test('can render with redux with custom store', () => {
   const {getByTestId, getByText} = renderWithRedux(<ConnectedCounter />, {
     store,
   })
-  FireEvent.fireEvent(getByText('+'), 'click')
+  fireEvent.click(getByText('+'))
   expect(getByTestId('count-value').textContent).toBe('1000')
-  FireEvent.fireEvent(getByText('-'), 'click')
+  fireEvent.click(getByText('-'))
   expect(getByTestId('count-value').textContent).toBe('1000')
 })

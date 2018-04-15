@@ -63,8 +63,11 @@ facilitate testing implementation details). Read more about this in
 * [Installation](#installation)
 * [Usage](#usage)
   * [`render`](#render)
-  * [`FireEvent`](#fireevent)
+  * [`renderIntoDocument`](#renderintodocument)
+  * [`cleanup`](#cleanup)
   * [`wait`](#wait)
+  * [`fireEvent(node: HTMLElement, event: Event)`](#fireeventnode-htmlelement-event-event)
+* [`debounceRenderingOff`](#debouncerenderingoff)
 * [`TextMatch`](#textmatch)
 * [`query` APIs](#query-apis)
 * [FAQ](#faq)
@@ -236,85 +239,30 @@ const usernameInputElement = getByTestId('username-input')
 > Learn more about `data-testid`s from the blog post
 > ["Making your UI tests resilient to change"][data-testid-blog-post]
 
-### `FireEvent`
+### `renderIntoDocument`
 
-This is a simple util that actually does trigger a actual DOM event. It uses `dispatchEvent` under the hood for
-firing event.
-
-The API is simple:
+Render into `document.body`. Should be used with [cleanup](#cleanup)
 
 ```javascript
-FireEvent.fireEvent(element, event)
+renderIntoDocument(<div>)
 ```
 
-`event` can be `click`, `submit` etc. `element` is the actual DOM element where you want to disptach the event.
+### `cleanup`
 
-Examples of events are covered under [here](https://github.com/antoaravinth/preact-testing-library/blob/master/src/__tests__/events.js).
-
-Here is the common use cases of `FireEvent`, when especially working with forms:
+Unmounts Preact trees that were mounted with [renderIntoDocument](#renderintodocument).
 
 ```javascript
-class MyForm extends preact.Component {
-  state = {checked: false, textbox: ''}
-  toggle = () => {
-    const checked = !this.state.checked
-    this.setState({checked})
-  }
-  type = e => {
-    const textbox = e.target.value
-    this.setState({textbox})
-  }
-  render({}, {checked, textbox}) {
-    return (
-      <div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={checked}
-              onClick={this.toggle}
-              data-testid="checkbox"
-            />
-            Checkbox
-          </label>
-          <p>{checked ? 'Yes' : 'No'}</p>
-        </div>
+afterEach(cleanup)
 
-        <div>
-          <label>
-            <input
-              type="textbox"
-              checked={textbox}
-              onChange={this.type}
-              data-testid="textbox"
-            />
-            Textbox
-          </label>
-          <p>{textbox}</p>
-        </div>
-      </div>
-    )
-  }
-}
-
-test('testing different types of events', async () => {
-  const {getByTestId, getByText, queryByText} = render(<MyForm />)
-
-  const checkBox = getByTestId('checkbox')
-
-  // Act
-  FireEvent.fireEvent(checkBox, 'click')
-  const textbox = getByTestId('textbox')
-  textbox.value = 'test value'
-  FireEvent.fireEvent(textbox, 'change')
-
-  await flushPromises()
-  // Assert
-  expect(queryByText('No')).not.toBeInTheDOM()
-  expect(getByText('Yes')).toBeInTheDOM()
-  expect(getByText('test value')).toBeInTheDOM()
+test('renders into document', () => {
+  renderIntoDocument(<div>)
+  // ...
 })
 ```
+
+Failing to call `cleanup` when you've called `renderIntoDocument` could
+result in a memory leak and tests which are not `idempotent` (which can
+lead to difficult to debug errors in your tests).
 
 ### `wait`
 
@@ -359,6 +307,80 @@ The default `timeout` is `4500ms` which will keep you under
 The default `interval` is `50ms`. However it will run your callback immediately
 on the next tick of the event loop (in a `setTimeout`) before starting the
 intervals.
+
+### `fireEvent(node: HTMLElement, event: Event)`
+
+Fire DOM events.
+
+You can fire events directly to your DOM. You can render into the document using the
+[renderIntoDocument](#renderintodocument) utility.
+
+```javascript
+import {
+  renderIntoDocument,
+  cleanup,
+  render,
+  fireEvent,
+} from 'preact-testing-library'
+
+// don't forget to clean up the document.body
+afterEach(cleanup)
+
+test('clicks submit button', () => {
+  const spy = jest.fn()
+  const {getByText} = renderIntoDocument(<button onClick={spy}>Submit</button>)
+
+  fireEvent(
+    getByText('Submit'),
+    new MouseEvent('click', {
+      bubbles: true, // click events must bubble for React to see it
+      cancelable: true,
+    }),
+  )
+
+  expect(spy).toHaveBeenCalledTimes(1)
+})
+```
+
+#### `fireEvent[eventName](node: HTMLElement, eventProperties: Object)`
+
+Convenience methods for firing DOM events. Check out
+[dom-testing-library/src/events.js](https://github.com/kentcdodds/dom-testing-library/blob/master/src/events.js)
+for a full list as well as default `eventProperties`.
+
+```javascript
+// similar to the above example
+// click will bubble for React to see it
+const rightClick = {button: 2}
+fireEvent.click(getElementByText('Submit'), rightClick)
+// default `button` property for click events is set to `0` which is a left click.
+```
+
+## `debounceRenderingOff`
+
+Preact `setState` is debounced, which means any call `setState`, you have to use `wait` or `flushPromise`
+API to assert. However, there is a handy method for this `debounceRenderingOff`.
+
+You can invoke this `debounceRenderingOff` to turn off the debounce feature of Preact.
+
+```javascript
+test('testing different types of events with debounce off', () => {
+  debounceRenderingOff() //turns off the debounce, no need for any waits!
+  const {getByTestId, getByText, queryByText} = render(<MyForm />)
+  const checkBox = getByTestId('checkbox')
+
+  // Act
+  fireEvent.click(checkBox)
+  const textbox = getByTestId('textbox')
+  textbox.value = 'test value'
+  fireEvent.change(textbox)
+
+  // Assert
+  expect(queryByText('No')).not.toBeInTheDOM()
+  expect(getByText('Yes')).toBeInTheDOM()
+  expect(getByText('test value')).toBeInTheDOM()
+})
+```
 
 ## `TextMatch`
 
