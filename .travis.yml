@@ -1,13 +1,18 @@
-sudo: false
 language: node_js
 cache:
   directories:
     - ~/.npm
 notifications:
   email: false
-node_js: '8'
-install: npm install
-script: npm run validate
-after_success: kcd-scripts travis-after-success
+node_js:
+  - '9'
+  - '8'
+  - '6'
+  - '4'
+script:
+  - npm run test
+after_success:
+  - npm run travis-deploy-once "npm run semantic-release"
 branches:
-  only: master
+  except:
+    - /^v\d+\.\d+\.\d+$/

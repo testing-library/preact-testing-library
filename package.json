@@ -1,6 +1,6 @@
 {
   "name": "preact-testing-library",
-  "version": "0.0.2-semantically-released",
+  "version": "0.0.0-development",
   "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
   "main": "dist/index.js",
   "typings": "typings/index.d.ts",
@@ -15,7 +15,9 @@
     "test:update": "npm test -- --updateSnapshot --coverage",
     "validate": "kcd-scripts validate",
     "setup": "npm install && npm run validate -s",
-    "precommit": "kcd-scripts precommit"
+    "precommit": "kcd-scripts precommit",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "files": [
     "dist",
@@ -48,7 +50,9 @@
     "preact": "^8.2.7",
     "preact-redux": "^2.0.3",
     "redux": "^3.7.2",
-    "react": "^16.3.1"
+    "react": "^16.3.1",
+    "semantic-release": "^15.5.1",
+    "travis-deploy-once": "^5.0.0"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
@@ -67,7 +71,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antoaravinth/preact-testing-library"
+    "url": "https://github.com/antoaravinth/preact-testing-library"
   },
   "bugs": {
     "url": "https://github.com/antoaravinth/preact-testing-library/issues"
