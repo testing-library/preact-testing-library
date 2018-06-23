@@ -39,7 +39,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-plugin-module-resolver": "^2.7.1",
-    "dom-testing-library": "^1.0.0",
+    "dom-testing-library": "^2.6.1",
     "wait-for-expect": "0.4.0"
   },
   "devDependencies": {
@@ -57,6 +57,7 @@
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
     "rules": {
+      "import/named": "off",
       "import/no-unassigned-import": "off",
       "react/react-in-jsx-scope": "off",
       "react/prefer-stateless-function": "off",

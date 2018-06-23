@@ -1,5 +1,11 @@
 import preact from 'preact' // eslint-disable-line
-import {render, fireEvent, flushPromises, debounceRenderingOff} from '../'
+import {
+  cleanup,
+  render,
+  fireEvent,
+  flushPromises,
+  debounceRenderingOff,
+} from '../'
 import 'dom-testing-library/extend-expect'
 
 /** @jsx preact.h */
@@ -47,6 +53,8 @@ class MyForm extends preact.Component {
   }
 }
 
+afterEach(cleanup)
+
 //debounceRenderingOff is not set, so render will be debounced!
 test('testing different types of events', async () => {
   const {getByTestId, getByText, queryByText} = render(<MyForm />)
@@ -60,6 +68,7 @@ test('testing different types of events', async () => {
   fireEvent.change(textbox)
 
   await flushPromises()
+
   // Assert
   expect(queryByText('No')).not.toBeInTheDOM()
   expect(getByText('Yes')).toBeInTheDOM()

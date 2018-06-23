@@ -1,5 +1,5 @@
 import preact from 'preact'
-import {render} from '../'
+import {cleanup, render} from '../'
 import 'dom-testing-library/extend-expect'
 
 // lets order jest that we are using Preact here.
@@ -9,6 +9,8 @@ class HelloPreact extends preact.Component {
     return <div>Hello world</div>
   }
 }
+
+afterEach(cleanup)
 
 test('simple preact component', () => {
   const {getByText, queryByText, unmount} = render(<HelloPreact />)
