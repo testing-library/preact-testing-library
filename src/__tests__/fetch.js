@@ -1,6 +1,6 @@
 import preact from 'preact'
 import axiosMock from 'axios'
-import {render, flushPromises, fireEvent} from '../'
+import {cleanup, render, flushPromises, fireEvent} from '../'
 
 /** @jsx preact.h */
 class Fetch extends preact.Component {
@@ -24,6 +24,8 @@ class Fetch extends preact.Component {
     )
   }
 }
+
+afterEach(cleanup)
 
 test('Fetch makes an API call and displays the greeting when load-greeting is clicked', async () => {
   // Arrange

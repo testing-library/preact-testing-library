@@ -1,5 +1,5 @@
 import preact from 'preact' // eslint-disable-line
-import {renderIntoDocument, fireEvent} from '../'
+import {cleanup, render, fireEvent} from '../'
 import 'dom-testing-library/extend-expect' // eslint-disable-line valid-jsdoc // eslint-disable-line
 
 /** @jsx preact.h */
@@ -32,16 +32,16 @@ function Login({onSubmit}) {
   )
 }
 
+afterEach(cleanup)
+
 test('login form submits', () => {
   const fakeUser = {username: 'jackiechan', password: 'hiya! 🥋'}
   const handleSubmit = jest.fn()
-  const {getByLabelText, getByText} = renderIntoDocument(
-    <Login onSubmit={handleSubmit} />,
-  )
+  const {getByLabelText, getByText} = render(<Login onSubmit={handleSubmit} />)
 
-  const usernameNode = getByLabelText('username')
-  const passwordNode = getByLabelText('password')
-  const submitButtonNode = getByText('submit')
+  const usernameNode = getByLabelText('Username')
+  const passwordNode = getByLabelText('Password')
+  const submitButtonNode = getByText('Submit')
 
   // Act
   usernameNode.value = fakeUser.username

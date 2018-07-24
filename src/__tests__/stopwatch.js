@@ -1,5 +1,5 @@
 import preact from 'preact'
-import {render, fireEvent} from '../'
+import {cleanup, render, fireEvent} from '../'
 
 /** @jsx preact.h */
 class StopWatch extends preact.Component {
@@ -40,10 +40,12 @@ class StopWatch extends preact.Component {
 
 const wait = time => new Promise(resolve => setTimeout(resolve, time))
 
+afterEach(cleanup)
+
 test('unmounts a component', async () => {
   jest.spyOn(console, 'error').mockImplementation(() => {})
   const {unmount, getByText, container} = render(<StopWatch />)
-  fireEvent.click(getByText('start'))
+  fireEvent.click(getByText('Start'))
   unmount()
   // hey there reader! You don't need to have an assertion like this one
   // this is just me making sure that the unmount function works.

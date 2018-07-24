@@ -1,6 +1,8 @@
 import preact from 'preact'
 import cases from 'jest-in-case'
-import {render} from '../'
+import {cleanup, render} from '../'
+
+afterEach(cleanup)
 
 /** @jsx preact.h */
 cases(
@@ -11,11 +13,11 @@ cases(
         About
       </a>,
     )
-    expect(getByText(opts.textMatch).id).toBe('anchor')
+    expect(getByText(opts.textMatch, opts.options).id).toBe('anchor')
   },
   [
     {name: 'string match', textMatch: 'About'},
-    {name: 'case insensitive', textMatch: 'about'},
+    {name: 'case insensitive', textMatch: 'about', options: {exact: false}},
     {name: 'regex', textMatch: /^about$/i},
     {
       name: 'function',

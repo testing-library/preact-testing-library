@@ -1,7 +1,7 @@
 import preact from 'preact'
 import {createStore} from 'redux'
 import {connect, Provider} from 'preact-redux'
-import {render, fireEvent} from '../'
+import {cleanup, render, fireEvent} from '../'
 
 /** @jsx preact.h */
 class Counter extends preact.Component {
@@ -76,6 +76,8 @@ function renderWithRedux(
     store,
   }
 }
+
+afterEach(cleanup)
 
 // TODO: These cases are failing in preact. Need to debug
 // test('can render with redux with defaults', () => {

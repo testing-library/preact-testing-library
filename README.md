@@ -57,21 +57,19 @@ facilitate testing implementation details). Read more about this in
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-* [Installation](#installation)
-* [Usage](#usage)
-  * [`render`](#render)
-  * [`renderIntoDocument`](#renderintodocument)
-  * [`cleanup`](#cleanup)
-  * [`wait`](#wait)
-  * [`fireEvent(node: HTMLElement, event: Event)`](#fireeventnode-htmlelement-event-event)
-* [`debounceRenderingOff`](#debouncerenderingoff)
-* [`TextMatch`](#textmatch)
-* [`query` APIs](#query-apis)
-* [FAQ](#faq)
-* [Guiding Principles](#guiding-principles)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [`render`](#render)
+  - [`cleanup`](#cleanup)
+  - [`wait`](#wait)
+  - [`fireEvent(node: HTMLElement, event: Event)`](#fireeventnode-htmlelement-event-event)
+- [`debounceRenderingOff`](#debouncerenderingoff)
+- [`TextMatch`](#textmatch)
+- [`query` APIs](#query-apis)
+- [FAQ](#faq)
+- [Guiding Principles](#guiding-principles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -123,6 +121,16 @@ test('Fetch makes an API call and displays the greeting when load-greeting is cl
 
 ### `render`
 
+Render into a container which is appended to document.body. It should be used with [cleanup](#cleanup):
+
+```javascript
+import {render, cleanup} from 'preact-testing-library'
+
+afterEach(cleanup)
+
+render(<div />)
+```
+
 In the example above, the `render` method returns an object that has a few
 properties:
 
@@ -133,6 +141,37 @@ The containing DOM node of your rendered Preact Element (rendered using
 `container.querySelector` etc. to inspect the children.
 
 > Tip: To get the root element of your rendered element, use `container.firstChild`.
+
+#### `debug`
+
+This method is a shortcut for `console.log(prettyDOM(container))`.
+
+```javascript
+import {render} from 'preact-testing-library'
+
+const HelloWorld = () => <h1>Hello World</h1>
+const {debug} = render(<HelloWorld />)
+debug()
+// <div>
+//   <h1>Hello World</h1>
+// </div>
+// you can also pass an element: debug(getByTestId('messages'))
+```
+
+This is a simple wrapper around prettyDOM which is also exposed and comes from [dom-testing-library](https://github.com/kentcdodds/dom-testing-library/blob/master/README.md#prettydom).
+
+#### `rerender`
+
+It'd probably be better if you test the component that's doing the prop updating to ensure that the props are being updated correctly (see the Guiding Principles section). That said, if you'd prefer to update the props of a rendered component in your test, this function can be used to update props of the rendered component.
+
+```javascript
+import {render} from 'preact-testing-library'
+
+const {rerender} = render(<NumberDisplay number={1} />)
+
+// re-render the same component with different props
+rerender(<NumberDisplay number={2} />)
+```
 
 #### `unmount`
 
@@ -239,28 +278,20 @@ const usernameInputElement = getByTestId('username-input')
 > Learn more about `data-testid`s from the blog post
 > ["Making your UI tests resilient to change"][data-testid-blog-post]
 
-### `renderIntoDocument`
-
-Render into `document.body`. Should be used with [cleanup](#cleanup)
-
-```javascript
-renderIntoDocument(<div>)
-```
-
 ### `cleanup`
 
-Unmounts Preact trees that were mounted with [renderIntoDocument](#renderintodocument).
+Unmounts Preact trees that were mounted with [render](#render).
 
 ```javascript
 afterEach(cleanup)
 
 test('renders into document', () => {
-  renderIntoDocument(<div>)
+  render(<div>)
   // ...
 })
 ```
 
-Failing to call `cleanup` when you've called `renderIntoDocument` could
+Failing to call `cleanup` when you've called `render` could
 result in a memory leak and tests which are not `idempotent` (which can
 lead to difficult to debug errors in your tests).
 
@@ -313,22 +344,17 @@ intervals.
 Fire DOM events.
 
 You can fire events directly to your DOM. You can render into the document using the
-[renderIntoDocument](#renderintodocument) utility.
+[render](#renderintodocument) utility.
 
 ```javascript
-import {
-  renderIntoDocument,
-  cleanup,
-  render,
-  fireEvent,
-} from 'preact-testing-library'
+import {cleanup, render, fireEvent} from 'preact-testing-library'
 
 // don't forget to clean up the document.body
 afterEach(cleanup)
 
 test('clicks submit button', () => {
   const spy = jest.fn()
-  const {getByText} = renderIntoDocument(<button onClick={spy}>Submit</button>)
+  const {getByText} = render(<button onClick={spy}>Submit</button>)
 
   fireEvent(
     getByText('Submit'),
