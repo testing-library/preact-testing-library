@@ -1,31 +1,26 @@
-import {Simulate as ReactSimulate} from 'react-dom/test-utils'
+import { getQueriesForElement } from 'dom-testing-library'
 
-interface RenderResult {
-  container: HTMLDivElement
+export * from 'dom-testing-library'
+
+type GetsAndQueries = ReturnType<typeof getQueriesForElement>
+
+export interface RenderResult extends GetsAndQueries {
+  container: HTMLElement
+  debug: (el?: HTMLElement) => void
+  rerender: (rerenderUi: JSX.Element) => void
   unmount: VoidFunction
-  queryByTestId: (id: string) => HTMLElement | null
-  getByTestId: (id: string) => HTMLElement
-  queryByText: (id: string) => HTMLElement | null
-  getByText: (id: string) => HTMLElement
-  queryByPlaceholderText: (id: string) => HTMLElement | null
-  getByPlaceholderText: (id: string) => HTMLElement
-  queryByLabelText: (id: string) => HTMLElement | null
-  getByLabelText: (id: string) => HTMLElement
-  queryByAltText: (text: string) => HTMLElement | null
-  getByAltText: (text: string) => HTMLElement
 }
 
 export function render(
-  ui: React.ReactElement<any>,
-  options?: {container: HTMLElement},
+  ui: JSX.Element,
+  options?: {
+    baseElement?: HTMLElement
+    container?: HTMLElement
+  }
 ): RenderResult
 
-export const Simulate: typeof ReactSimulate
+export function cleanup(): void
 
-export function wait(
-  callback?: () => void,
-  options?: {
-    timeout?: number
-    interval?: number
-  },
-): Promise<void>
+export function debounceRenderingOff(): void
+
+export function flushPromises(): Promise<void>
