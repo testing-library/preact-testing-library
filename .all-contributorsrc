@@ -148,6 +148,15 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "amogower",
+      "name": "Andrew Gower",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5639658?v=4",
+      "profile": "https://www.zipcube.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

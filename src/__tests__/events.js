@@ -6,7 +6,7 @@ import {
   flushPromises,
   debounceRenderingOff,
 } from '../'
-import 'dom-testing-library/extend-expect'
+import 'jest-dom/extend-expect'
 
 /** @jsx preact.h */
 
@@ -70,9 +70,9 @@ test('testing different types of events', async () => {
   await flushPromises()
 
   // Assert
-  expect(queryByText('No')).not.toBeInTheDOM()
-  expect(getByText('Yes')).toBeInTheDOM()
-  expect(getByText('test value')).toBeInTheDOM()
+  expect(queryByText('No')).not.toBeInTheDocument()
+  expect(getByText('Yes')).toBeInTheDocument()
+  expect(getByText('test value')).toBeInTheDocument()
 })
 
 //debounceRenderingOff is set. No need of waiting or calling flushPromises
@@ -88,9 +88,9 @@ test('testing different types of events with debounce off', () => {
   fireEvent.change(textbox)
 
   // Assert
-  expect(queryByText('No')).not.toBeInTheDOM()
-  expect(getByText('Yes')).toBeInTheDOM()
-  expect(getByText('test value')).toBeInTheDOM()
+  expect(queryByText('No')).not.toBeInTheDocument()
+  expect(getByText('Yes')).toBeInTheDocument()
+  expect(getByText('test value')).toBeInTheDocument()
 })
 
 /* eslint jsx-a11y/label-has-for:0 */
