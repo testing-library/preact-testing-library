@@ -38,32 +38,62 @@
   "author": "Anto Aravinth",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "babel-plugin-module-resolver": "^2.7.1",
-    "dom-testing-library": "^2.6.1",
+    "dom-testing-library": "^3.12.0",
+    "jest-dom": "^2.1.0",
     "wait-for-expect": "0.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
     "axios": "^0.18.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-preact": "^1.1.6",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.26.2",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
     "history": "^4.7.2",
     "jest-in-case": "^1.0.2",
-    "kcd-scripts": "^0.36.1",
+    "jsdom": "11.11.0",
+    "kcd-scripts": "^0.45.0",
     "preact": "^8.2.7",
     "preact-redux": "^2.0.3",
     "redux": "^3.7.2",
-    "react": "^16.3.1",
     "semantic-release": "^15.5.1",
-    "travis-deploy-once": "^5.0.0",
-    "jsdom": "11.11.0"
+    "travis-deploy-once": "^5.0.0"
   },
   "eslintConfig": {
-    "extends": "./node_modules/kcd-scripts/eslint.js",
+    "extends": [
+      "standard",
+      "standard-preact"
+    ],
+    "plugins": [
+      "jest"
+    ],
+    "env": {
+      "jest/globals": true
+    },
     "rules": {
       "import/named": "off",
       "import/no-unassigned-import": "off",
       "react/react-in-jsx-scope": "off",
       "react/prefer-stateless-function": "off",
       "react/prop-types": "off",
-      "no-empty-pattern": "off"
+      "no-empty-pattern": "off",
+      "space-before-function-paren": "off",
+      "comma-dangle": "off",
+      "object-curly-spacing": "off",
+      "jsx-quotes": "off",
+      "spaced-comment": "off"
     }
   },
   "eslintIgnore": [
@@ -71,6 +101,16 @@
     "coverage",
     "dist"
   ],
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "testEnvironment": "jsdom",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/antoaravinth/preact-testing-library"

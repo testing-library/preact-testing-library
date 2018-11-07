@@ -1,0 +1,20 @@
+{
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "@babel/plugin-transform-react-jsx",
+          {
+            "pragma": "h"
+          }
+        ],
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread"
+      ],
+      "presets": [
+        "@babel/preset-env"
+      ]
+    }
+  },
+  "presets": ["kcd-scripts/babel"]
+}

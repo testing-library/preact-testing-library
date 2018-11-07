@@ -1,6 +1,6 @@
 import preact from 'preact'
 import {cleanup, render} from '../'
-import 'dom-testing-library/extend-expect'
+import 'jest-dom/extend-expect'
 
 // lets order jest that we are using Preact here.
 /** @jsx preact.h */
@@ -15,11 +15,11 @@ afterEach(cleanup)
 test('simple preact component', () => {
   const {getByText, queryByText, unmount} = render(<HelloPreact />)
 
-  expect(getByText('Hello world')).toBeInTheDOM()
-  expect(queryByText('No Hello world')).not.toBeInTheDOM()
+  expect(getByText('Hello world')).toBeInTheDocument()
+  expect(queryByText('No Hello world')).not.toBeInTheDocument()
 
   unmount() // unmount the component
-  expect(queryByText('Hello world')).not.toBeInTheDOM() // should not be present in the dom
+  expect(queryByText('Hello world')).not.toBeInTheDocument() // should not be present in the dom
 })
 
 test('query can return null', () => {
@@ -51,7 +51,8 @@ test('get can get form controls by label text', () => {
   const {getByLabelText} = render(
     <div>
       <label>
-        1st<input id="first-id" />
+        1st
+        <input id="first-id" />
       </label>
       <div>
         <label htmlFor="second-id">2nd</label>

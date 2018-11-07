@@ -1,6 +1,6 @@
 import preact from 'preact' // eslint-disable-line
 import {cleanup, render, fireEvent} from '../'
-import 'dom-testing-library/extend-expect' // eslint-disable-line valid-jsdoc // eslint-disable-line
+import 'jest-dom/extend-expect' // eslint-disable-line valid-jsdoc // eslint-disable-line
 
 /** @jsx preact.h */
 
