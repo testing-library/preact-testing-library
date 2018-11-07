@@ -38,6 +38,7 @@
   "author": "Anto Aravinth",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "babel-plugin-module-resolver": "^2.7.1",
     "dom-testing-library": "^3.12.0",
     "jest-dom": "^2.1.0",
@@ -46,6 +47,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "axios": "^0.18.0",
@@ -62,11 +64,10 @@
     "history": "^4.7.2",
     "jest-in-case": "^1.0.2",
     "jsdom": "11.11.0",
-    "kcd-scripts": "^0.36.1",
+    "kcd-scripts": "^0.45.0",
     "preact": "^8.2.7",
     "preact-redux": "^2.0.3",
     "redux": "^3.7.2",
-    "regenerator-runtime": "^0.12.1",
     "semantic-release": "^15.5.1",
     "travis-deploy-once": "^5.0.0"
   },
