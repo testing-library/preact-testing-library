@@ -1,11 +1,11 @@
 {
   "name": "preact-testing-library",
-  "version": "0.0.0-development",
+  "version": "0.3.0",
   "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
   "main": "dist/index.js",
   "typings": "typings/index.d.ts",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
