@@ -1,14 +1,14 @@
 <div align="center">
 <h1>preact-testing-library</h1>
 
-<p>Simple and complete PReact DOM testing utilities that encourage good testing practices.</p>
+<p>Simple and complete Preact DOM testing utilities that encourage good testing practices.</p>
 </div>
 
 <hr />
 
 ## The problem
 
-You want to write maintainable tests for your PReact components. As a part of
+You want to write maintainable tests for your Preact components. As a part of
 this goal, you want your tests to avoid including implementation details of
 your components and rather focus on making your tests give you the confidence
 for which they are intended. As part of this, you want your testbase to be
