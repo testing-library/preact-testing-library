@@ -1,14 +1,14 @@
 <div align="center">
 <h1>preact-testing-library</h1>
 
-<p>Simple and complete PReact DOM testing utilities that encourage good testing practices.</p>
+<p>Simple and complete Preact DOM testing utilities that encourage good testing practices.</p>
 </div>
 
 <hr />
 
 ## The problem
 
-You want to write maintainable tests for your PReact components. As a part of
+You want to write maintainable tests for your Preact components. As a part of
 this goal, you want your tests to avoid including implementation details of
 your components and rather focus on making your tests give you the confidence
 for which they are intended. As part of this, you want your testbase to be
@@ -24,7 +24,7 @@ It's primary guiding principle is:
 
 > [The more your tests resemble the way your software is used, the more confidence they can give you.][guiding-principle]
 
-So rather than dealing with instances of rendered preact components, your tests
+So rather than dealing with instances of rendered Preact components, your tests
 will work with actual DOM nodes. The utilities this library provides facilitate
 querying the DOM in the same way the user would. Finding for elements by their
 label text (just like a user would), finding links and buttons from their text
@@ -326,7 +326,7 @@ getByLabelText('username').value = 'chucknorris'
 
 This can be useful if you have a unit test that mocks API calls and you need
 to wait for your mock promises to all resolve. This can also be useful when
-(for example) you integration test your apollo-connected preact components that
+(for example) you integration test your apollo-connected Preact components that
 go a couple level deep, with queries fired up in consequent components.
 
 The default `callback` is a no-op function (used like `await wait()`). This can
@@ -596,7 +596,7 @@ able to give you.
 
 That's not to say that there's never a use case for doing those things, so they
 should be possible to accomplish, just not the default and natural way to test
-preact components.
+Preact components.
 
 </details>
 
@@ -605,7 +605,7 @@ preact components.
 > [The more your tests resemble the way your software is used, the more confidence they can give you.][guiding-principle]
 
 We try to only expose methods and utilities that encourage you to write tests
-that closely resemble how your preact components are used.
+that closely resemble how your Preact components are used.
 
 Utilities are included in this project based on the following guiding
 principles:
@@ -613,7 +613,7 @@ principles:
 1.  If it relates to rendering components, it deals with DOM nodes rather than
     component instances, nor should it encourage dealing with component
     instances.
-2.  It should be generally useful for testing individual preact components or
+2.  It should be generally useful for testing individual Preact components or
     full Preact applications. While this library is focused on the actual dom,
     utilities could be included even if they don't directly relate to the actual dom.
 3.  Utility implementations and APIs should be simple and flexible.
