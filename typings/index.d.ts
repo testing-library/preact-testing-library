@@ -1,4 +1,5 @@
 import { getQueriesForElement } from 'dom-testing-library'
+import { JSX } from 'preact'
 
 export * from 'dom-testing-library'
 
