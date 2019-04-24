@@ -4,7 +4,7 @@ export * from 'dom-testing-library'
 
 type GetsAndQueries = ReturnType<typeof getQueriesForElement>
 
-export interface RenderResult extends GetsAndQueries {
+export type RenderResult = GetsAndQueries & {
   container: HTMLElement
   debug: (el?: HTMLElement) => void
   rerender: (rerenderUi: JSX.Element) => void
