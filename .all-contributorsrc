@@ -21,6 +21,17 @@
       ]
     },
     {
+      "login": "antsmartian",
+      "name": "Ants Martian",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1241511?s=400&v=4",
+      "profile": "https://github.com/antsmartian",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
       "login": "mihar-22",
       "name": "Rahim Alwer",
       "avatar_url": "https://avatars3.githubusercontent.com/u/14304599?s=460&v=4",
@@ -34,5 +45,6 @@
     }
   ],
   "contributorsPerLine": 7,
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "commitConvention": "none"
 }
