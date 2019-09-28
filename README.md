@@ -6,7 +6,7 @@
     height="80"
     width="80"
     alt="poodle"
-    src="https://raw.githubusercontent.com/mihar-22/preact-testing-library/master/other/poodle.png"
+    src="https://raw.githubusercontent.com/testing-library/preact-testing-library/master/other/poodle.png"
   />
 </a>
 
@@ -66,7 +66,7 @@ implementation but not functionality) don't break your tests and slow you and yo
 
 ## The Solution
 
-The Peact Testing Library is a very lightweight solution for testing Preact components. It provides
+The Preact Testing Library is a very lightweight solution for testing Preact components. It provides
 light utility functions on top of preact/test-utils, in a way that encourages better testing
 practices. Its primary guiding principle is:
 
@@ -78,7 +78,7 @@ This module is distributed via [npm][npm] which is bundled with [node][node] and
 as one of your project's `devDependencies`:
 
 ```
-npm install --save-dev preact-testing-library-next
+npm install --save-dev preact-testing-library
 ```
 
 This library has `peerDependencies` listings for `preact`.
@@ -346,9 +346,9 @@ Thanks goes to these people ([emoji key][emojis]):
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#infra-kentcdodds" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/antsmartian"><img src="https://avatars0.githubusercontent.com/u/1241511?s=400&v=4" width="100px;" alt="Ants Martian"/><br /><sub><b>Ants Martian</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=antsmartian" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=antsmartian" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=antsmartian" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/mihar-22"><img src="https://avatars3.githubusercontent.com/u/14304599?s=460&v=4" width="100px;" alt="Rahim Alwer"/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Tests">⚠️</a> <a href="#infra-mihar-22" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/testing-library/preact-testing-library/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#infra-kentcdodds" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=kentcdodds" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/antsmartian"><img src="https://avatars0.githubusercontent.com/u/1241511?s=400&v=4" width="100px;" alt="Ants Martian"/><br /><sub><b>Ants Martian</b></sub></a><br /><a href="https://github.com/testing-library/preact-testing-library/commits?author=antsmartian" title="Code">💻</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=antsmartian" title="Documentation">📖</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=antsmartian" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/testing-library"><img src="https://avatars3.githubusercontent.com/u/14304599?s=460&v=4" width="100px;" alt="Rahim Alwer"/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/testing-library/preact-testing-library/commits?author=testing-library" title="Code">💻</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=testing-library" title="Documentation">📖</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=testing-library" title="Tests">⚠️</a> <a href="#infra-testing-library" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
@@ -367,29 +367,29 @@ kind welcome!
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
-[build]: https://travis-ci.org/mihar-22/preact-testing-library
-[build-badge]: https://travis-ci.org/mihar-22/preact-testing-library.svg?branch=master
-[coverage-badge]: https://img.shields.io/codecov/c/github/mihar-22/preact-testing-library.svg?style=flat-square
-[coverage]: https://codecov.io/github/mihar-22/preact-testing-library
-[package]: https://www.npmjs.com/package/preact-testing-library-next
-[version-badge]: https://img.shields.io/npm/v/preact-testing-library-next
-[downloads-badge]: https://img.shields.io/npm/dw/preact-testing-library-next
+[build]: https://travis-ci.org/testing-library/preact-testing-library
+[build-badge]: https://travis-ci.org/testing-library/preact-testing-library.svg?branch=master
+[coverage-badge]: https://img.shields.io/codecov/c/github/testing-library/preact-testing-library.svg?style=flat-square
+[coverage]: https://codecov.io/github/testing-library/preact-testing-library
+[package]: https://www.npmjs.com/package/preact-testing-library
+[version-badge]: https://img.shields.io/npm/v/preact-testing-library
+[downloads-badge]: https://img.shields.io/npm/dw/preact-testing-library
 [slack]: https://preact-slack.now.sh
-[license]: https://github.com/mihar-22/preact-testing-library/blob/master/LICENSE
-[license-badge]: https://img.shields.io/github/license/mihar-22/preact-testing-library?color=b
+[license]: https://github.com/testing-library/preact-testing-library/blob/master/LICENSE
+[license-badge]: https://img.shields.io/github/license/testing-library/preact-testing-library?color=b
 [emojis]: https://github.com/all-contributors/all-contributors#emoji-key
 [all-contributors]: https://github.com/all-contributors/all-contributors
 [guiding-principle]: https://twitter.com/kentcdodds/status/977018512689455106
-[bugs]: https://github.com/mihar-22/preact-testing-library/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acreated-desc
-[requests]: https://github.com/mihar-22/preact-testing-library/issues?q=is%3Aissue+sort%3Areactions-%2B1-desc+label%3Aenhancement+is%3Aopen
-[good-first-issue]: https://github.com/mihar-22/preact-testing-library/issues?utf8=✓&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3A"good+first+issue"+
+[bugs]: https://github.com/testing-library/preact-testing-library/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acreated-desc
+[requests]: https://github.com/testing-library/preact-testing-library/issues?q=is%3Aissue+sort%3Areactions-%2B1-desc+label%3Aenhancement+is%3Aopen
+[good-first-issue]: https://github.com/testing-library/preact-testing-library/issues?utf8=✓&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3A"good+first+issue"+
 [stackoverflow]: https://stackoverflow.com/questions/tagged/preact-testing-library
 [react-testing-library]: https://github.com/testing-library/react-testing-library
 [react-testing-library-docs]: https://testing-library.com/docs/react-testing-library/intro
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/mihar-22/preact-testing-library/blob/master/CODE_OF_CONDUCT.md
+[coc]: https://github.com/testing-library/preact-testing-library/blob/master/CODE_OF_CONDUCT.md
 [preact-slack]: https://preact-slack.now.sh/
 [preact-slack-badge]: https://preact-slack.now.sh/badge.svg
 [commitzen]: http://commitizen.github.io/cz-cli/

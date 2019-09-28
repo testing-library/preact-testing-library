@@ -1,18 +1,18 @@
 {
-  "name": "preact-testing-library-next",
+  "name": "preact-testing-library",
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "license": "MIT",
   "author": "Rahim Alwer <rahim_alwer@hotmail.com>",
-  "homepage": "https://github.com/mihar-22/preact-testing-library#readme",
+  "homepage": "https://github.com/testing-library/preact-testing-library#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mihar-22/preact-testing-library"
+    "url": "https://github.com/testing-library/preact-testing-library"
   },
   "bugs": {
-    "url": "https://github.com/mihar-22/preact-testing-library/issues"
+    "url": "https://github.com/testing-library/preact-testing-library/issues"
   },
   "engines": {
     "node": ">= 8"

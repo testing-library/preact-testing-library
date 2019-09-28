@@ -19,7 +19,7 @@ Installation instructions can be found here: https://yarnpkg.com/en/docs/install
 > branches on your fork. To do this, run:
 >
 > ```
-> git remote add upstream https://github.com/testing-library/react-testing-library.git
+> git remote add upstream https://github.com/testing-library/preact-testing-library.git
 > git fetch upstream
 > git branch --set-upstream-to=upstream/master master
 > ```
