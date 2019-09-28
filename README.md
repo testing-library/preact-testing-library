@@ -16,7 +16,7 @@ practices.</p>
 > Inspired completely by [react-testing-library][react-testing-library]
 
 [![Build Status][build-badge]][build] [![Code Coverage][coverage-badge]][coverage]
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 [![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
 [![version][version-badge]][package] [![downloads][downloads-badge]][package]
 [![MIT License][license-badge]][license]
@@ -346,15 +346,18 @@ Thanks goes to these people ([emoji key][emojis]):
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/mihar-22"><img src="https://avatars3.githubusercontent.com/u/14304599?s=460&v=4" width="100px;" alt="Rahim Alwer"/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#infra-kentcdodds" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/mihar-22"><img src="https://avatars3.githubusercontent.com/u/14304599?s=460&v=4" width="100px;" alt="Rahim Alwer"/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Tests">⚠️</a> <a href="#infra-mihar-22" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
+
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors][all-contributors] specification.
-Contributions of any kind welcome!
+This project follows the [all-contributors][all-contributors] specification. Contributions of any
+kind welcome!
 
 ## LICENSE
 
