@@ -121,5 +121,8 @@
       "typeahead/filename",
       "typeahead/testname"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
