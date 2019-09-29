@@ -1,9 +1,6 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-        "targets": { "node": "8" }
-    }]
-  ],
+    ["@babel/preset-env", { "targets": { "node": "8" } }]],
   "plugins": [
     ["@babel/plugin-transform-runtime"],
     ["@babel/plugin-proposal-class-properties"],
