@@ -78,10 +78,10 @@ This module is distributed via [npm][npm] which is bundled with [node][node] and
 as one of your project's `devDependencies`:
 
 ```
-npm install --save-dev preact-testing-library
+npm install --save-dev @testing-library/preact
 ```
 
-This library has `peerDependencies` listings for `preact`.
+This library has `peerDependencies` listings for `preact >= 10`.
 
 💡 You may also be interested in installing `@testing-library/jest-dom` so you can use
 [the custom jest matchers](https://github.com/testing-library/jest-dom).
@@ -89,12 +89,14 @@ This library has `peerDependencies` listings for `preact`.
 📝 This library supports Preact X (10.x). It takes advantage of the `act` test utility in
 `preact/test-utils` to enable both Preact Hook and Class components to be easily tested.
 
+📝 If you're looking for a solution for Preact 8.x then install `preact-testing-library`.
+
 ## Usage
 
 ### `render`
 
 ```jsx
-import { render } from 'preact-testing-library'
+import { render } from '@testing-library/preact'
 
 const { returns } = render(<YourComponent />, { arguments })
 ```
@@ -125,7 +127,7 @@ Unmounts the component from the container and destroys the container.
 to disable this then set `process.env.PTL_SKIP_AUTO_CLEANUP` to true when running your tests.
 
 ```jsx
-import { render, cleanup } from 'preact-testing-library'
+import { render, cleanup } from '@testing-library/preact'
 
 afterEach(() => {
   cleanup
@@ -256,7 +258,7 @@ function HiddenMessage({ children }) {
 import '@testing-library/jest-dom/extend-expect'
 
 import { h } from 'preact'
-import { render, fireEvent } from 'preact-testing-library'
+import { render, fireEvent } from '@testing-library/preact'
 import HiddenMessage from '../hidden-message'
 
 test('shows the children when the checkbox is checked', () => {
@@ -346,9 +348,9 @@ Thanks goes to these people ([emoji key][emojis]):
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=kentcdodds" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/antsmartian"><img src="https://avatars0.githubusercontent.com/u/1241511?s=400&v=4" width="100px;" alt="Ants Martian"/><br /><sub><b>Ants Martian</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=antsmartian" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=antsmartian" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=antsmartian" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/mihar-22"><img src="https://avatars3.githubusercontent.com/u/14304599?s=460&v=4" width="100px;" alt="Rahim Alwer"/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Code">💻</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Documentation">📖</a> <a href="https://github.com/mihar-22/preact-testing-library/commits?author=mihar-22" title="Tests">⚠️</a> <a href="#infra-mihar-22" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/testing-library/preact-testing-library/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=kentcdodds" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/antsmartian"><img src="https://avatars0.githubusercontent.com/u/1241511?s=400&v=4" width="100px;" alt="Ants Martian"/><br /><sub><b>Ants Martian</b></sub></a><br /><a href="https://github.com/testing-library/preact-testing-library/commits?author=antsmartian" title="Code">💻</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=antsmartian" title="Documentation">📖</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=antsmartian" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/mihar-22"><img src="https://avatars3.githubusercontent.com/u/14304599?s=460&v=4" width="100px;" alt="Rahim Alwer"/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/testing-library/preact-testing-library/commits?author=mihar-22" title="Code">💻</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=mihar-22" title="Documentation">📖</a> <a href="https://github.com/testing-library/preact-testing-library/commits?author=mihar-22" title="Tests">⚠️</a> <a href="#infra-mihar-22" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
@@ -371,9 +373,9 @@ kind welcome!
 [build-badge]: https://travis-ci.org/testing-library/preact-testing-library.svg?branch=master
 [coverage-badge]: https://img.shields.io/codecov/c/github/testing-library/preact-testing-library.svg?style=flat-square
 [coverage]: https://codecov.io/github/testing-library/preact-testing-library
-[package]: https://www.npmjs.com/package/preact-testing-library
-[version-badge]: https://img.shields.io/npm/v/preact-testing-library
-[downloads-badge]: https://img.shields.io/npm/dw/preact-testing-library
+[package]: https://www.npmjs.com/package/@testing-library/preact
+[version-badge]: https://img.shields.io/npm/v/@testing-library/preact
+[downloads-badge]: https://img.shields.io/npm/dw/@testing-library/preact
 [slack]: https://preact-slack.now.sh
 [license]: https://github.com/testing-library/preact-testing-library/blob/master/LICENSE
 [license-badge]: https://img.shields.io/github/license/testing-library/preact-testing-library?color=b
