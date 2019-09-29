@@ -94,7 +94,7 @@ This library has `peerDependencies` listings for `preact`.
 ### `render`
 
 ```jsx
-import { render } from 'preact-testing-library-next'
+import { render } from 'preact-testing-library'
 
 const { returns } = render(<YourComponent />, { arguments })
 ```
@@ -125,7 +125,7 @@ Unmounts the component from the container and destroys the container.
 to disable this then set `process.env.PTL_SKIP_AUTO_CLEANUP` to true when running your tests.
 
 ```jsx
-import { render, cleanup } from 'preact-testing-library-next'
+import { render, cleanup } from 'preact-testing-library'
 
 afterEach(() => {
   cleanup
@@ -256,7 +256,7 @@ function HiddenMessage({ children }) {
 import '@testing-library/jest-dom/extend-expect'
 
 import { h } from 'preact'
-import { render, fireEvent } from 'preact-testing-library-next'
+import { render, fireEvent } from 'preact-testing-library'
 import HiddenMessage from '../hidden-message'
 
 test('shows the children when the checkbox is checked', () => {
