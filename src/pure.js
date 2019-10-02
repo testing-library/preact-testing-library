@@ -29,11 +29,9 @@ function render(
   // they're passing us a custom container or not.
   mountedContainers.add(container);
 
-  const wrapUiIfNeeded = (innerElement) => (WrapperComponent ? (
-      <WrapperComponent>
-        <innerElement/>
-      </WrapperComponent>
-  ) : innerElement);
+  const wrapUiIfNeeded = (innerElement) => (WrapperComponent
+    ? h(WrapperComponent, null, innerElement)
+    : innerElement);
 
   preactAct(() => {
     if (hydrate) {
