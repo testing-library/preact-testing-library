@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { render } from '..';
 
-// This just verifies that by importing RTL in an
+// This just verifies that by importing PTL in an
 // environment which supports afterEach (like jest)
 // we'll get automatic cleanup between tests.
 test('first', () => {
