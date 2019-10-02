@@ -43,4 +43,4 @@ Please checkout the [the open issues][issues]
 Also, please watch the repo and respond to questions/bug reports/feature requests! Thanks!
 
 [egghead]: https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github
-[issues]: https://github.com/mihar-22/preact-testing-library/issues
+[issues]: https://github.com/testing-library/preact-testing-library/issues

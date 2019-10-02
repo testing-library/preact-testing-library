@@ -89,7 +89,9 @@ test('renders options.wrapper around node', () => {
     <div
       data-testid="wrapper"
     >
-      <innerelement />
+      <div
+        data-testid="inner"
+      />
     </div>
   `);
 });
