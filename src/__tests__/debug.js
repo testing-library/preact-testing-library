@@ -1,26 +1,26 @@
 /* eslint-disable no-console */
 
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect'
 
-import { h } from 'preact';
+import { h } from 'preact'
 
-import { render } from '..';
+import { render } from '..'
 
 beforeEach(() => {
-  jest.spyOn(console, 'log').mockImplementation(() => {});
-});
+  jest.spyOn(console, 'log').mockImplementation(() => {})
+})
 
 afterEach(() => {
-  console.log.mockRestore();
-});
+  console.log.mockRestore()
+})
 
 test('debug pretty prints the container', () => {
-  const HelloWorld = () => (<h1>Hello World</h1>);
+  const HelloWorld = () => (<h1>Hello World</h1>)
 
-  const { debug } = render(<HelloWorld />);
+  const { debug } = render(<HelloWorld />)
 
-  debug();
+  debug()
 
-  expect(console.log).toHaveBeenCalledTimes(1);
-  expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Hello World'));
-});
+  expect(console.log).toHaveBeenCalledTimes(1)
+  expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Hello World'))
+})

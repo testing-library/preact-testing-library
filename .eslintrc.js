@@ -7,22 +7,16 @@ module.exports = {
   },
   parser: 'babel-eslint',
   extends: [
-    'airbnb-base',
+    "standard"
   ],
   plugins: [
     'simple-import-sort',
+    'react-hooks'
   ],
   rules: {
     'max-len': ['warn', {'code': 100}],
-    'comma-dangle': 'off',
-    'no-underscore-dangle': 'off',
-    'simple-import-sort/sort': 'error',
-    'class-methods-use-this': 'off',
-    'no-unused-vars': 'off',
-    'max-classes-per-file': 'off',
-  },
-  globals: {
-    document: 'readonly',
-    window: 'readonly',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'no-unused-vars': 'off'
   }
 };

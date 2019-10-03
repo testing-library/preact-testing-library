@@ -1,43 +1,43 @@
-import { createRef, h } from 'preact';
+import { createRef, h } from 'preact'
 
-import { fireEvent, render } from '..';
+import { fireEvent, render } from '..'
 
 const eventTypes = [
   {
     type: 'Clipboard',
     events: ['copy', 'paste'],
-    elementType: 'input',
+    elementType: 'input'
   },
   {
     type: 'Composition',
     events: ['compositionEnd', 'compositionStart', 'compositionUpdate'],
-    elementType: 'input',
+    elementType: 'input'
   },
   {
     type: 'Keyboard',
     events: ['keyDown', 'keyPress', 'keyUp'],
     elementType: 'input',
-    init: { keyCode: 13 },
+    init: { keyCode: 13 }
   },
   {
     type: 'Focus',
     events: ['focus', 'blur'],
-    elementType: 'input',
+    elementType: 'input'
   },
   {
     type: 'Form',
     events: ['focus', 'blur'],
-    elementType: 'input',
+    elementType: 'input'
   },
   {
     type: 'Focus',
     events: ['input', 'invalid'],
-    elementType: 'input',
+    elementType: 'input'
   },
   {
     type: 'Focus',
     events: ['submit'],
-    elementType: 'form',
+    elementType: 'form'
   },
   {
     type: 'Mouse',
@@ -59,29 +59,29 @@ const eventTypes = [
       'mouseMove',
       'mouseOut',
       'mouseOver',
-      'mouseUp',
+      'mouseUp'
     ],
-    elementType: 'button',
+    elementType: 'button'
   },
   {
     type: 'Selection',
     events: ['select'],
-    elementType: 'input',
+    elementType: 'input'
   },
   {
     type: 'Touch',
     events: ['touchCancel', 'touchEnd', 'touchMove', 'touchStart'],
-    elementType: 'button',
+    elementType: 'button'
   },
   {
     type: 'UI',
     events: ['scroll'],
-    elementType: 'div',
+    elementType: 'div'
   },
   {
     type: 'Wheel',
     events: ['wheel'],
-    elementType: 'div',
+    elementType: 'div'
   },
   {
     type: 'Media',
@@ -108,78 +108,78 @@ const eventTypes = [
       'suspend',
       'timeUpdate',
       'volumeChange',
-      'waiting',
+      'waiting'
     ],
-    elementType: 'video',
+    elementType: 'video'
   },
   {
     type: 'Image',
     events: ['load', 'error'],
-    elementType: 'img',
+    elementType: 'img'
   },
   {
     type: 'Animation',
     events: ['animationStart', 'animationEnd', 'animationIteration'],
-    elementType: 'div',
+    elementType: 'div'
   },
   {
     type: 'Transition',
     events: ['transitionEnd'],
-    elementType: 'div',
-  },
-];
+    elementType: 'div'
+  }
+]
 
 eventTypes.forEach(({
   type, events, elementType, init
 }) => {
   describe(`${type} Events`, () => {
     events.forEach((eventName) => {
-      const eventProp = `on${eventName.toLowerCase()}`;
+      const eventProp = `on${eventName.toLowerCase()}`
 
       it(`triggers ${eventProp}`, () => {
-        const ref = createRef();
-        const spy = jest.fn();
+        const ref = createRef()
+        const spy = jest.fn()
 
         render(
           h(elementType, {
             [eventProp]: spy,
-            ref,
+            ref
           })
-        );
+        )
 
-        fireEvent[eventName](ref.current, init);
+        fireEvent[eventName](ref.current, init)
 
-        expect(spy).toHaveBeenCalledTimes(1);
-      });
-    });
-  });
-});
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+    })
+  })
+})
 
 test('onInput works', () => {
-  const handler = jest.fn();
+  const handler = jest.fn()
 
   const { container: { firstChild: input } } = render(
     (<input type="text" onInput={handler} />)
-  );
+  )
 
-  fireEvent.input(input, { target: { value: 'a' } });
+  fireEvent.input(input, { target: { value: 'a' } })
 
-  expect(handler).toHaveBeenCalledTimes(1);
-});
+  expect(handler).toHaveBeenCalledTimes(1)
+})
 
 test('calling `fireEvent` directly works too', () => {
-  const handleEvent = jest.fn();
+  const handleEvent = jest.fn()
 
   const { container: { firstChild: button } } = render(
     (<button onClick={handleEvent} />)
-  );
+  )
 
   fireEvent(
     button,
     new Event('MouseEvent', {
       bubbles: true,
       cancelable: true,
-      button: 0,
-    }),
-  );
-});
+      button: 0
+    })
+  )
+})

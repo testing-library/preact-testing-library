@@ -1,4 +1,4 @@
-import { act, cleanup } from './pure';
+import { act, cleanup } from './pure'
 
 // If we're running in a test runner that supports afterEach
 // then we'll automatically run cleanup afterEach test
@@ -7,9 +7,9 @@ import { act, cleanup } from './pure';
 // or set the PTL_SKIP_AUTO_CLEANUP env variable to 'true'.
 if (typeof afterEach === 'function' && !process.env.PTL_SKIP_AUTO_CLEANUP) {
   afterEach(() => {
-    act(() => {});
-    cleanup();
-  });
+    act(() => {})
+    cleanup()
+  })
 }
 
-export * from './pure';
+export * from './pure'

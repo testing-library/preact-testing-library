@@ -1,37 +1,37 @@
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect'
 
-import { h } from 'preact';
+import { h } from 'preact'
 
-import { render } from '..';
+import { render } from '..'
 
 test('rerender will re-render the element', () => {
-  const Greeting = (props) => <div>{props.message}</div>;
+  const Greeting = (props) => <div>{props.message}</div>
 
-  const { container, rerender } = render(<Greeting message="hi" />);
+  const { container, rerender } = render(<Greeting message="hi" />)
 
-  expect(container.firstChild).toHaveTextContent('hi');
-  rerender(<Greeting message="hey" />);
-  expect(container.firstChild).toHaveTextContent('hey');
-});
+  expect(container.firstChild).toHaveTextContent('hi')
+  rerender(<Greeting message="hey" />)
+  expect(container.firstChild).toHaveTextContent('hey')
+})
 
 test('hydrate will not update props until next render', () => {
-  const initialInputElement = document.createElement('input');
-  const container = document.createElement('div');
+  const initialInputElement = document.createElement('input')
+  const container = document.createElement('div')
 
-  container.appendChild(initialInputElement);
-  document.body.appendChild(container);
+  container.appendChild(initialInputElement)
+  document.body.appendChild(container)
 
-  const firstValue = 'hello';
-  initialInputElement.value = firstValue;
+  const firstValue = 'hello'
+  initialInputElement.value = firstValue
 
   const { rerender } = render(<input value="" onChange={() => null} />, {
     container,
-    hydrate: true,
-  });
-  expect(initialInputElement.value).toBe(firstValue);
+    hydrate: true
+  })
+  expect(initialInputElement.value).toBe(firstValue)
 
-  const secondValue = 'goodbye';
+  const secondValue = 'goodbye'
 
-  rerender(<input value={secondValue} onChange={() => null} />);
-  expect(initialInputElement.value).toBe(secondValue);
-});
+  rerender(<input value={secondValue} onChange={() => null} />)
+  expect(initialInputElement.value).toBe(secondValue)
+})
