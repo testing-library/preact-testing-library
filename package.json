@@ -48,7 +48,6 @@
     "contributors:generate": "all-contributors generate"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.5",
     "@testing-library/dom": "^6.1.0"
   },
   "devDependencies": {
@@ -57,7 +56,6 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-modules-commonjs": "^7.6.0",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
-    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
