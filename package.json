@@ -115,10 +115,6 @@
     ]
   },
   "jest": {
-    "moduleNameMapper": {
-      "^react$": "preact/compat",
-      "^react-dom$": "preact/compat"
-    },
     "watchPlugins": [
       "typeahead/filename",
       "typeahead/testname"
