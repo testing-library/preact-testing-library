@@ -36,14 +36,15 @@
     "types/index.d.ts"
   ],
   "scripts": {
-    "toc": "npx doctoc README.md",
+    "toc": "doctoc README.md",
     "lint": "eslint src/**/*.js --fix",
-    "build": " npx babel src --out-dir dist --ignore '**/__tests__/**,**/__mocks__/**'",
+    "clean": "rimraf dist",
+    "build": " babel src --out-dir dist --ignore '**/__tests__/**,**/__mocks__/**'",
     "test": "jest src/__tests__ ",
     "test:watch": "yarn test --watch",
     "test:update": "yarn test --updateSnapshot --coverage",
     "setup": "yarn && yarn validate",
-    "validate": "npm-run-all lint test:update build",
+    "validate": "yarn lint && yarn test && yarn clean && yarn build",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },
@@ -77,10 +78,10 @@
     "jest": "^24.9.0",
     "jest-watch-typeahead": "^0.4.0",
     "lint-staged": "^9.2.5",
-    "npm-run-all": "^4.1.5",
     "preact": "^10.0.0-rc.1",
     "preact-portal": "^1.1.3",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0"
   },
   "peerDependencies": {
     "preact": ">=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0"
@@ -103,7 +104,7 @@
     ],
     "**/*.js": [
       "yarn lint",
-      "yarn test:update",
+      "yarn test",
       "git add"
     ]
   },
