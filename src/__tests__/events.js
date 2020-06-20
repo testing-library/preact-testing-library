@@ -1,5 +1,4 @@
 import { createRef, h } from 'preact'
-
 import { fireEvent, render } from '..'
 
 const eventTypes = [

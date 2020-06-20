@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom/extend-expect'
 import { Component, h } from 'preact'
-
-import { render, waitFor } from '..' // eslint-disable-line import/named
+import { screen, render, waitForElementToBeRemoved } from '..'
 
 const fetchAMessage = () => new Promise((resolve) => {
   // we are using random timeout here to simulate a real-time example
@@ -15,15 +15,15 @@ const fetchAMessage = () => new Promise((resolve) => {
 class ComponentWithLoader extends Component {
   state = { loading: true }
 
-  async componentDidMount () {
-    const data = await fetchAMessage()
-
-    this.setState({data, loading: false}) // eslint-disable-line
+  componentDidMount () {
+    fetchAMessage().then(data => {
+      this.setState({ data, loading: false })
+    })
   }
 
   render () {
     if (this.state.loading) {
-      return <div>Loading...</div>
+      return (<div>Loading...</div>)
     }
 
     return (
@@ -35,11 +35,8 @@ class ComponentWithLoader extends Component {
 }
 
 test('it waits for the data to be loaded', async () => {
-  const { queryByText, queryByTestId } = render(<ComponentWithLoader />)
-
-  expect(queryByText('Loading...')).toBeTruthy()
-
-  await waitFor(() => expect(queryByText('Loading...')).toBeNull())
-
-  expect(queryByTestId('message').textContent).toMatch(/Hello World/)
+  render(<ComponentWithLoader />)
+  const loading = () => screen.getByText('Loading...')
+  await waitForElementToBeRemoved(loading)
+  expect(screen.getByTestId('message')).toHaveTextContent(/Hello World/)
 })

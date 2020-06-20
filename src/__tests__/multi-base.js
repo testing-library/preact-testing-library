@@ -1,5 +1,4 @@
 import { h } from 'preact'
-
 import { render } from '..'
 
 // These are created once per test suite and reused for each case

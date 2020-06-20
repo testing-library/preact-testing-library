@@ -1,7 +1,5 @@
 import '@testing-library/jest-dom/extend-expect'
-
 import { h } from 'preact'
-
 import { render } from '..'
 
 test('rerender will re-render the element', () => {

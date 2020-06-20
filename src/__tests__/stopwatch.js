@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 import { Component, h } from 'preact'
-
 import { fireEvent, render } from '..'
 
 class StopWatch extends Component {

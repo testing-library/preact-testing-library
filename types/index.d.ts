@@ -26,6 +26,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
  * Render into a container which is appended to document.body. It should be used with cleanup.
  */
 export function render(ui: ComponentChild, options?: Omit<RenderOptions, 'queries'>): RenderResult
+
 export function render<Q extends Queries>(
   ui: ComponentChild,
   options: RenderOptions<Q>,

@@ -1,5 +1,4 @@
 import { h } from 'preact'
-
 import { render } from '..'
 
 // This just verifies that by importing PTL in an

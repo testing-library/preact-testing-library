@@ -1,8 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
-
 import { createRef, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
-
 import { fireEvent, render } from '..'
 
 test('render calls useEffect immediately', () => {

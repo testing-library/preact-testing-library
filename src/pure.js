@@ -1,6 +1,23 @@
-import * as dtl from '@testing-library/dom'
+import { getQueriesForElement, prettyDOM, configure as configureDTL } from '@testing-library/dom'
 import { h, hydrate as preactHydrate, render as preactRender } from 'preact'
-import { act as preactAct } from 'preact/test-utils'
+import { act, setupRerender } from 'preact/test-utils'
+
+configureDTL({
+  asyncWrapper: async cb => {
+    let result
+    await act(() => {
+      result = cb()
+    })
+    return result
+  },
+  eventWrapper: async cb => {
+    let result
+    await act(() => {
+      result = cb()
+    })
+    return result
+  }
+})
 
 const mountedContainers = new Set()
 
@@ -33,7 +50,7 @@ function render (
     ? h(WrapperComponent, null, innerElement)
     : innerElement)
 
-  preactAct(() => {
+  act(() => {
     if (hydrate) {
       preactHydrate(wrapUiIfNeeded(ui), container)
     } else {
@@ -44,9 +61,15 @@ function render (
   return {
     container,
     baseElement,
-    debug: (el = baseElement) => console.log(dtl.prettyDOM(el)),
+    debug: (el = baseElement, maxLength, options) =>
+      Array.isArray(el)
+        // eslint-disable-next-line no-console
+        ? el.forEach(e => console.log(prettyDOM(e, maxLength, options)))
+        // eslint-disable-next-line no-console,
+        : console.log(prettyDOM(el, maxLength, options)),
     unmount: () => preactRender(null, container),
     rerender: (rerenderUi) => {
+      setupRerender()()
       render(wrapUiIfNeeded(rerenderUi), { container, baseElement })
       // Intentionally do not return anything to avoid unnecessarily complicating the API.
       // folks can use all the same utilities we return in the first place that are bound to
@@ -57,13 +80,13 @@ function render (
         return document
           .createRange()
           .createContextualFragment(container.innerHTML)
+      } else {
+        const template = document.createElement('template')
+        template.innerHTML = container.innerHTML
+        return template.content
       }
-
-      const template = document.createElement('template')
-      template.innerHTML = container.innerHTML
-      return template.content
     },
-    ...dtl.getQueriesForElement(baseElement, queries)
+    ...getQueriesForElement(baseElement, queries)
   }
 }
 
@@ -83,35 +106,5 @@ function cleanup () {
   mountedContainers.forEach(cleanupAtContainer)
 }
 
-// preact-testing-library's version of fireEvent will call
-// dom-testing-library's version of fireEvent wrapped inside
-// an "act" call so that after all event callbacks have been
-// been called, the resulting useEffect callbacks will also
-// be called.
-function fireEvent (...args) {
-  let returnValue
-
-  preactAct(() => {
-    returnValue = dtl.fireEvent(...args)
-  })
-
-  return returnValue
-}
-
-Object.keys(dtl.fireEvent).forEach((key) => {
-  fireEvent[key] = (...args) => {
-    let returnValue
-
-    preactAct(() => {
-      returnValue = dtl.fireEvent[key](...args)
-    })
-
-    return returnValue
-  }
-})
-
 export * from '@testing-library/dom'
-
-export {
-  render, cleanup, fireEvent, preactAct as act
-}
+export { render, cleanup, act }

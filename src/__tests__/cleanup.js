@@ -1,7 +1,5 @@
 import '@testing-library/jest-dom/extend-expect'
-
 import { Component, h } from 'preact'
-
 import { cleanup, render } from '..'
 
 test('cleans up the document', () => {

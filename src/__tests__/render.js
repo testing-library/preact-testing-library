@@ -1,8 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
-
 import { Component, createRef, h } from 'preact'
 import Portal from 'preact-portal'
-
 import { render } from '..'
 
 test('renders div into document', () => {
