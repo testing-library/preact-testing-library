@@ -20,7 +20,7 @@ script: yarn validate
 jobs:
   include:
   - stage: release
-    node_js: '12'
+    node_js: '14'
     deploy:
       provider: script
       script: yarn test:update && npx codecov && npx semantic-release
