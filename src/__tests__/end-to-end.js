@@ -1,6 +1,6 @@
 import { Component, h } from 'preact'
 
-import { render, wait } from '..' // eslint-disable-line import/named
+import { render, waitFor } from '..' // eslint-disable-line import/named
 
 const fetchAMessage = () => new Promise((resolve) => {
   // we are using random timeout here to simulate a real-time example
@@ -39,7 +39,7 @@ test('it waits for the data to be loaded', async () => {
 
   expect(queryByText('Loading...')).toBeTruthy()
 
-  await wait(() => expect(queryByText('Loading...')).toBeNull())
+  await waitFor(() => expect(queryByText('Loading...')).toBeNull())
 
   expect(queryByTestId('message').textContent).toMatch(/Hello World/)
 })
