@@ -165,6 +165,6 @@ kind welcome!
 [preact-slack-badge]: https://preact-slack.now.sh/badge.svg
 [commitzen]: http://commitizen.github.io/cz-cli/
 [commitzen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[discord-badge]: https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square
+[discord-badge]: https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff
 [discord]: https://discord.gg/c6JN9fM
 <!-- prettier-ignore-end -->
