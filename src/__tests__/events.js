@@ -146,7 +146,7 @@ eventTypes.forEach(({
           })
         )
 
-        fireEvent[eventName](ref.current, init)
+        expect(fireEvent[eventName](ref.current, init)).toBe(true)
 
         expect(spy).toHaveBeenCalledTimes(1)
       })
@@ -161,24 +161,32 @@ test('onInput works', () => {
     (<input type="text" onInput={handler} />)
   )
 
-  fireEvent.input(input, { target: { value: 'a' } })
+  expect(fireEvent.input(input, { target: { value: 'a' } })).toBe(true)
 
   expect(handler).toHaveBeenCalledTimes(1)
 })
 
 test('calling `fireEvent` directly works too', () => {
-  const handleEvent = jest.fn()
+  const handler = jest.fn()
 
   const { container: { firstChild: button } } = render(
-    (<button onClick={handleEvent} />)
+    (<button onClick={handler} />)
   )
 
-  fireEvent(
+  expect(fireEvent(
     button,
     new Event('MouseEvent', {
       bubbles: true,
       cancelable: true,
       button: 0
     })
+  )).toBe(true)
+})
+
+test('`fireEvent` returns false when prevented', () => {
+  const { container: { firstChild: button } } = render(
+    (<button onClick={(e) => { e.preventDefault() }} />)
   )
+
+  expect(fireEvent.click(button)).toBe(false)
 })
