@@ -41,10 +41,10 @@
     "clean": "rimraf dist",
     "build": " babel src --out-dir dist --ignore '**/__tests__/**,**/__mocks__/**'",
     "test": "jest src/__tests__ ",
-    "test:watch": "yarn test --watch",
-    "test:update": "yarn test --updateSnapshot --coverage",
-    "setup": "yarn && yarn validate",
-    "validate": "yarn lint && yarn test && yarn clean && yarn build",
+    "test:watch": "npm test --watch",
+    "test:update": "npm test --updateSnapshot --coverage",
+    "setup": "npm install && npm run validate",
+    "validate": "npm run lint && npm test && npm run clean && npm run build",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },
@@ -94,17 +94,17 @@
   },
   "lint-staged": {
     "README.md": [
-      "yarn toc",
+      "npm run toc",
       "prettier --parser markdown --write",
       "git add"
     ],
     ".all-contributorsrc": [
-      "yarn contributors:generate",
+      "npm run contributors:generate",
       "git add"
     ],
     "**/*.js": [
-      "yarn lint",
-      "yarn test",
+      "npm run lint",
+      "npm test",
       "git add"
     ]
   },

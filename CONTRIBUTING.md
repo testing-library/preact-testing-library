@@ -7,12 +7,8 @@ to an Open Source Project on GitHub][egghead]
 
 ## Project setup
 
-Make sure that Yarn is installed.
-<br>
-Installation instructions can be found here: https://yarnpkg.com/en/docs/install.
-
 1.  Fork and clone the repo
-2.  Run `yarn setup` to install dependencies and run validation
+2.  Run `npm run setup -s` to install dependencies and run validation
 3.  Create a branch for your PR with `git checkout -b pr/your-branch-name`
 
 > Tip: Keep your `master` branch pointing at the original repository and make pull requests from
@@ -32,7 +28,7 @@ Installation instructions can be found here: https://yarnpkg.com/en/docs/install
 
 ## Committing and Pushing changes
 
-Please make sure to run the tests before you commit your changes. You can run `yarn test:update`
+Please make sure to run the tests before you commit your changes. You can run `npm run test:update`
 which will update any snapshots that need updating. Make sure to include those changes (if they
 exist) in your commit.
 
