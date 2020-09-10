@@ -10,9 +10,9 @@ configureDTL({
     })
     return result
   },
-  eventWrapper: async cb => {
+  eventWrapper: cb => {
     let result
-    await act(() => {
+    act(() => {
       result = cb()
     })
     return result
