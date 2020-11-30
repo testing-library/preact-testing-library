@@ -5,17 +5,17 @@ import { ComponentChild } from 'preact'
 export * from '@testing-library/dom'
 
 export type RenderResult<Q extends Queries = typeof queries> = {
-  container: HTMLElement
-  baseElement: HTMLElement
-  debug: (baseElement?: HTMLElement | DocumentFragment) => void
+  container: Element
+  baseElement: Element
+  debug: (baseElement?: Element | DocumentFragment) => void
   rerender: (ui: ComponentChild) => void
   unmount: () => boolean
   asFragment: () => DocumentFragment
 } & { [P in keyof Q]: BoundFunction<Q[P]> }
 
 export interface RenderOptions<Q extends Queries = typeof queries> {
-  container?: HTMLElement
-  baseElement?: HTMLElement
+  container?: Element
+  baseElement?: Element
   queries?: Q
   wrapper?: ComponentChild
 }
