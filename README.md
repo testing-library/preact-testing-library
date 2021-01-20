@@ -21,8 +21,7 @@ practices.</p>
 [![version][version-badge]][package] [![downloads][downloads-badge]][package]
 [![MIT License][license-badge]][license]
 [![Preact Slack Community][preact-slack-badge]][preact-slack]
-[![Commitzen][commitzen-badge]][commitzen]
-[![Discord][discord-badge]][discord]
+[![Commitzen][commitzen-badge]][commitzen] [![Discord][discord-badge]][discord]
 
 </div>
 
@@ -166,5 +165,5 @@ kind welcome!
 [commitzen]: http://commitizen.github.io/cz-cli/
 [commitzen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [discord-badge]: https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff
-[discord]: https://discord.gg/c6JN9fM
+[discord]: https://discord.gg/testing-library
 <!-- prettier-ignore-end -->
