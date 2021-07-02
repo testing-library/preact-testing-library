@@ -75,7 +75,7 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
+    "jest": "^27.0.6",
     "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.11",
     "preact": "^10.0.0-rc.1",
@@ -114,6 +114,7 @@
     ]
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "watchPlugins": [
       "typeahead/filename",
       "typeahead/testname"
