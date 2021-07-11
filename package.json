@@ -15,7 +15,7 @@
     "url": "https://github.com/testing-library/preact-testing-library/issues"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12"
   },
   "keywords": [
     "testing",
