@@ -16,4 +16,4 @@ jobs:
         script: npm run test:update && npx codecov && npx semantic-release
         skip_cleanup: true
 branches:
-  only: master
+  only: main
