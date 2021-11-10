@@ -25,7 +25,7 @@ function render (
   ui,
   {
     container,
-    baseElement = container,
+    baseElement,
     queries,
     hydrate = false,
     wrapper: WrapperComponent
@@ -39,6 +39,8 @@ function render (
 
   if (!container) {
     container = baseElement.appendChild(document.createElement('div'))
+  } else {
+    baseElement.appendChild(container)
   }
 
   // We'll add it to the mounted containers regardless of whether it's actually

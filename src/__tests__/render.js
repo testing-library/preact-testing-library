@@ -11,6 +11,13 @@ test('renders div into document', () => {
   expect(container.firstChild).toBe(ref.current)
 })
 
+test('renders div into document with a custom container', () => {
+  const container = document.createElement('main')
+  const { getByRole } = render(<div />, { container })
+
+  expect(getByRole('main')).toBeInTheDocument()
+})
+
 test('works great with preact portals', () => {
   class MyPortal extends Component {
     constructor (...args) {
