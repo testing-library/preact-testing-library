@@ -69,7 +69,7 @@ function render (
         : console.log(prettyDOM(el, maxLength, options)),
     unmount: () => preactRender(null, container),
     rerender: (rerenderUi) => {
-      setupRerender()()
+      act(() => {})
       render(wrapUiIfNeeded(rerenderUi), { container, baseElement })
       // Intentionally do not return anything to avoid unnecessarily complicating the API.
       // folks can use all the same utilities we return in the first place that are bound to
