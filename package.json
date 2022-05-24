@@ -58,7 +58,7 @@
     "build": "npm run build:cjs && npm run build:esm && npm run copy:mjs",
     "build:cjs": "babel src --out-dir dist/cjs --config-file ./.babelrc --ignore '**/__tests__/**,**/__mocks__/**'",
     "build:esm": "babel src --no-babelrc --out-dir dist/esm --config-file ./.babelrc.esm.json --ignore '**/__tests__/**,**/__mocks__/**'",
-    "copy:mjs": "cp ./dist/esm/fire-event.js ./dist/esm/fire-event.mjs && cp ./dist/esm/pure.js ./dist/esm/pure.mjs && cp ./dist/esm/index.js ./dist/esm/index.mjs"
+    "copy:mjs": "cp ./dist/esm/fire-event.js ./dist/esm/fire-event.mjs && cp ./dist/esm/pure.js ./dist/esm/pure.mjs && cp ./dist/esm/index.js ./dist/esm/index.mjs",
     "test": "jest src/__tests__ ",
     "test:watch": "npm test --watch",
     "test:update": "npm test --updateSnapshot --coverage",
