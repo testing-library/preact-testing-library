@@ -125,15 +125,18 @@ const eventTypes = [
     type: 'Transition',
     events: ['transitionEnd'],
     elementType: 'div'
+  },
+  {
+    type: 'Pointer',
+    events: ['pointerEnter', 'pointerLeave'],
+    elementType: 'div'
   }
 ]
 
-eventTypes.forEach(({
-  type, events, elementType, init
-}) => {
+eventTypes.forEach(({ type, events, elementType, init }) => {
   describe(`${type} Events`, () => {
     events.forEach((eventName) => {
-      const eventProp = `on${eventName.toLowerCase()}`
+      const eventProp = `on${eventName[0].toUpperCase() + eventName.slice(1)}`
 
       it(`triggers ${eventProp}`, () => {
         const ref = createRef()
@@ -157,9 +160,9 @@ eventTypes.forEach(({
 test('onInput works', () => {
   const handler = jest.fn()
 
-  const { container: { firstChild: input } } = render(
-    (<input type="text" onInput={handler} />)
-  )
+  const {
+    container: { firstChild: input }
+  } = render(<input type="text" onInput={handler} />)
 
   expect(fireEvent.input(input, { target: { value: 'a' } })).toBe(true)
 
@@ -169,9 +172,9 @@ test('onInput works', () => {
 test('calling `fireEvent` directly works too', () => {
   const handler = jest.fn()
 
-  const { container: { firstChild: button } } = render(
-    (<button onClick={handler} />)
-  )
+  const {
+    container: { firstChild: button }
+  } = render(<button onClick={handler} />)
 
   expect(fireEvent(
     button,
