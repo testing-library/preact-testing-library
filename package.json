@@ -2,8 +2,21 @@
   "name": "@testing-library/preact",
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+			"types": "./types/index.d.ts",
+			"import": "./dist/esm/index.js",
+			"browser": "./dist/cjs/index.js"
+		},
+		"./pure": {
+			"types": "./pure.d.ts",
+			"import": "./dist/esm/pure.js",
+			"browser": "./dist/cjs/pure.js"
+		}
+  },
   "license": "MIT",
   "author": "Rahim Alwer <rahim_alwer@hotmail.com>",
   "homepage": "https://github.com/testing-library/preact-testing-library#readme",
@@ -33,13 +46,16 @@
     "dist",
     "dont-cleanup-after-each.js",
     "pure.js",
-    "types/index.d.ts"
+    "types/index.d.ts",
+    "pure.d.ts"
   ],
   "scripts": {
     "toc": "doctoc README.md",
     "lint": "eslint src/**/*.js --fix",
     "clean": "rimraf dist",
-    "build": " babel src --out-dir dist --ignore '**/__tests__/**,**/__mocks__/**'",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "babel src --out-dir dist/cjs --config-file ./.babelrc --ignore '**/__tests__/**,**/__mocks__/**'",
+    "build:esm": "babel src --no-babelrc --out-dir dist/esm --config-file ./.babelrc.esm.json --ignore '**/__tests__/**,**/__mocks__/**'",
     "test": "jest src/__tests__ ",
     "test:watch": "npm test --watch",
     "test:update": "npm test --updateSnapshot --coverage",
