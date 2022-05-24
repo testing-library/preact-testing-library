@@ -1,7 +1,7 @@
 import { getQueriesForElement, prettyDOM, configure as configureDTL } from '@testing-library/dom'
 import { h, hydrate as preactHydrate, render as preactRender } from 'preact'
 import { act } from 'preact/test-utils'
-import { fireEvent } from './file-event'
+import { fireEvent } from './fire-event'
 
 configureDTL({
   asyncWrapper: async cb => {
