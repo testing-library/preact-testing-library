@@ -1,6 +1,7 @@
 import { getQueriesForElement, prettyDOM, configure as configureDTL } from '@testing-library/dom'
 import { h, hydrate as preactHydrate, render as preactRender } from 'preact'
-import { act, setupRerender } from 'preact/test-utils'
+import { act } from 'preact/test-utils'
+import { fireEvent } from './fire-event'
 
 configureDTL({
   asyncWrapper: async cb => {
@@ -106,5 +107,7 @@ function cleanup () {
   mountedContainers.forEach(cleanupAtContainer)
 }
 
+// eslint-disable-next-line import/export
 export * from '@testing-library/dom'
-export { render, cleanup, act }
+// eslint-disable-next-line import/export
+export { render, cleanup, act, fireEvent }
