@@ -8,13 +8,15 @@
   "exports": {
     ".": {
 			"types": "./types/index.d.ts",
-			"import": "./dist/esm/index.js",
-			"browser": "./dist/cjs/index.js"
+      "browser": "./dist/esm/index.js",
+			"import": "./dist/esm/index.mjs",
+			"require": "./dist/cjs/index.js"
 		},
 		"./pure": {
 			"types": "./pure.d.ts",
-			"import": "./dist/esm/pure.js",
-			"browser": "./dist/cjs/pure.js"
+      "browser": "./dist/esm/pure.js",
+			"import": "./dist/esm/pure.mjs",
+			"require": "./dist/cjs/pure.js"
 		}
   },
   "license": "MIT",
@@ -53,9 +55,10 @@
     "toc": "doctoc README.md",
     "lint": "eslint src/**/*.js --fix",
     "clean": "rimraf dist",
-    "build": "npm run build:cjs && npm run build:esm",
+    "build": "npm run build:cjs && npm run build:esm && npm run copy:mjs",
     "build:cjs": "babel src --out-dir dist/cjs --config-file ./.babelrc --ignore '**/__tests__/**,**/__mocks__/**'",
     "build:esm": "babel src --no-babelrc --out-dir dist/esm --config-file ./.babelrc.esm.json --ignore '**/__tests__/**,**/__mocks__/**'",
+    "copy:mjs": "cp ./dist/esm/fire-event.js ./dist/esm/fire-event.mjs && cp ./dist/esm/pure.js ./dist/esm/pure.mjs && cp ./dist/esm/index.js ./dist/esm/index.mjs",
     "test": "jest src/__tests__ ",
     "test:watch": "npm test --watch",
     "test:update": "npm test --updateSnapshot --coverage",
