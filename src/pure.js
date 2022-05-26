@@ -1,5 +1,6 @@
 import { getQueriesForElement, prettyDOM, configure as configureDTL } from '@testing-library/dom'
-import { h, hydrate as preactHydrate, render as preactRender } from 'preact'
+import { h, hydrate as preactHydrate, render as preactRender, createRef } from 'preact'
+import { useEffect } from 'preact/hooks'
 import { act } from 'preact/test-utils'
 import { fireEvent } from './fire-event'
 
@@ -107,7 +108,35 @@ function cleanup () {
   mountedContainers.forEach(cleanupAtContainer)
 }
 
+function renderHook (renderCallback, options) {
+  const { initialProps, wrapper } = (options || {})
+  const result = createRef()
+
+  function TestComponent ({ renderCallbackProps }) {
+    const pendingResult = renderCallback(renderCallbackProps)
+
+    useEffect(() => {
+      result.current = pendingResult
+    })
+
+    return null
+  }
+
+  const { rerender: baseRerender, unmount } = render(
+    <TestComponent renderCallbackProps={initialProps} />,
+    { wrapper }
+  )
+
+  function rerender (rerenderCallbackProps) {
+    return baseRerender(
+      <TestComponent renderCallbackProps={rerenderCallbackProps} />
+    )
+  }
+
+  return { result, rerender, unmount }
+}
+
 // eslint-disable-next-line import/export
 export * from '@testing-library/dom'
 // eslint-disable-next-line import/export
-export { render, cleanup, act, fireEvent }
+export { render, cleanup, act, fireEvent, renderHook }
