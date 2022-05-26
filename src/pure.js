@@ -1,5 +1,6 @@
 import { getQueriesForElement, prettyDOM, configure as configureDTL } from '@testing-library/dom'
 import { h, hydrate as preactHydrate, render as preactRender, createRef } from 'preact'
+import { useEffect } from 'preact/hooks'
 import { act } from 'preact/test-utils'
 import { fireEvent } from './fire-event'
 
