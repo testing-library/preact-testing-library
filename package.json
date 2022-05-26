@@ -3,18 +3,18 @@
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/esm/index.mjs",
   "types": "types/index.d.ts",
   "exports": {
     ".": {
 			"types": "./types/index.d.ts",
-      "browser": "./dist/esm/index.js",
+      "browser": "./dist/esm/index.mjs",
 			"import": "./dist/esm/index.mjs",
 			"require": "./dist/cjs/index.js"
 		},
 		"./pure": {
 			"types": "./pure.d.ts",
-      "browser": "./dist/esm/pure.js",
+      "browser": "./dist/esm/pure.mjs",
 			"import": "./dist/esm/pure.mjs",
 			"require": "./dist/cjs/pure.js"
 		}
@@ -55,10 +55,9 @@
     "toc": "doctoc README.md",
     "lint": "eslint src/**/*.js --fix",
     "clean": "rimraf dist",
-    "build": "npm run build:cjs && npm run build:esm && npm run copy:mjs",
+    "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "babel src --out-dir dist/cjs --config-file ./.babelrc --ignore '**/__tests__/**,**/__mocks__/**'",
-    "build:esm": "babel src --no-babelrc --out-dir dist/esm --config-file ./.babelrc.esm.json --ignore '**/__tests__/**,**/__mocks__/**'",
-    "copy:mjs": "cp ./dist/esm/fire-event.js ./dist/esm/fire-event.mjs && cp ./dist/esm/pure.js ./dist/esm/pure.mjs && cp ./dist/esm/index.js ./dist/esm/index.mjs",
+    "build:esm": "babel src --no-babelrc --out-file-extension .mjs --out-dir dist/esm --config-file ./.babelrc.esm.json --ignore '**/__tests__/**,**/__mocks__/**'",
     "test": "jest src/__tests__ ",
     "test:watch": "npm test --watch",
     "test:update": "npm test --updateSnapshot --coverage",
