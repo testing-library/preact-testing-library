@@ -11,8 +11,10 @@ Object.keys(domFireEvent).forEach((key) => {
     // we hit the Preact listeners.
     const eventName = `on${key.toLowerCase()}`
     const isInElem = eventName in elem
-    return isInElem
-      ? domFireEvent[key](element, init)
-      : domFireEvent(elem, createEvent(key[0].toUpperCase() + key.slice(1), init))
+    if (isInElem) {
+      return domFireEvent[key](element, init)
+    } else {
+      return domFireEvent(elem, createEvent(key[0].toUpperCase() + key.slice(1), element, init))
+    }
   }
 })
