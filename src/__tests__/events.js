@@ -152,6 +152,9 @@ eventTypes.forEach(({ type, events, elementType, init }) => {
         expect(fireEvent[eventName](ref.current, init)).toBe(true)
 
         expect(spy).toHaveBeenCalledTimes(1)
+        if (init) {
+          expect(spy).toHaveBeenCalledWith(expect.objectContaining(init))
+        }
       })
     })
   })
@@ -164,9 +167,17 @@ test('onInput works', () => {
     container: { firstChild: input }
   } = render(<input type="text" onInput={handler} />)
 
-  expect(fireEvent.input(input, { target: { value: 'a' } })).toBe(true)
+  const targetProperties = { value: 'a' }
+  const otherProperties = { isComposing: true }
+  const init = {
+    target: targetProperties,
+    ...otherProperties
+  }
+
+  expect(fireEvent.input(input, init)).toBe(true)
 
   expect(handler).toHaveBeenCalledTimes(1)
+  expect(handler).toHaveBeenCalledWith(expect.objectContaining(otherProperties))
 })
 
 test('calling `fireEvent` directly works too', () => {
@@ -176,14 +187,16 @@ test('calling `fireEvent` directly works too', () => {
     container: { firstChild: button }
   } = render(<button onClick={handler} />)
 
-  expect(fireEvent(
-    button,
-    new Event('MouseEvent', {
-      bubbles: true,
-      cancelable: true,
-      button: 0
-    })
-  )).toBe(true)
+  const event = new MouseEvent('click', {
+    bubbles: true,
+    cancelable: true,
+    button: 0
+  })
+
+  expect(fireEvent(button, event)).toBe(true)
+
+  expect(handler).toHaveBeenCalledTimes(1)
+  expect(handler).toHaveBeenCalledWith(event)
 })
 
 test('`fireEvent` returns false when prevented', () => {
