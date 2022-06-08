@@ -5,16 +5,16 @@ import { fireEvent as domFireEvent, createEvent } from '@testing-library/dom'
 export const fireEvent = (...args) => domFireEvent(...args)
 
 Object.keys(domFireEvent).forEach((key) => {
-  fireEvent[key] = (element, init) => {
+  fireEvent[key] = (elem, init) => {
     // Preact registers event-listeners in lower-case, so onPointerStart becomes pointerStart
     // here we will copy this behavior, when we fire an element we will fire it in lowercase so
     // we hit the Preact listeners.
     const eventName = `on${key.toLowerCase()}`
     const isInElem = eventName in elem
     if (isInElem) {
-      return domFireEvent[key](element, init)
+      return domFireEvent[key](elem, init)
     } else {
-      return domFireEvent(elem, createEvent(key[0].toUpperCase() + key.slice(1), element, init))
+      return domFireEvent(elem, createEvent(key[0].toUpperCase() + key.slice(1), elem, init))
     }
   }
 })
