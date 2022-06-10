@@ -1,6 +1,6 @@
 import { queries, Queries, BoundFunction } from '@testing-library/dom'
 import { act as preactAct } from 'preact/test-utils'
-import { ComponentChild, ComponentType, Element } from 'preact'
+import { ComponentChild, ComponentType } from 'preact'
 
 export * from '@testing-library/dom'
 
