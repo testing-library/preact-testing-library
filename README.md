@@ -160,8 +160,8 @@ kind welcome!
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/testing-library/preact-testing-library/blob/master/CODE_OF_CONDUCT.md
-[preact-slack]: https://preact-slack.now.sh/
-[preact-slack-badge]: https://preact-slack.now.sh/badge.svg
+[preact-slack]: https://chat.preactjs.com/
+[preact-slack-badge]: https://img.shields.io/badge/Slack%20Community-preact.slack.com-blue
 [commitzen]: http://commitizen.github.io/cz-cli/
 [commitzen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [discord-badge]: https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff
