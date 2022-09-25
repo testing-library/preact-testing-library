@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
 import { h } from 'preact'
+import { useState, useEffect } from 'preact/hooks'
 import { render } from '..'
 
 test('rerender will re-render the element', () => {
@@ -10,6 +11,23 @@ test('rerender will re-render the element', () => {
   expect(container.firstChild).toHaveTextContent('hi')
   rerender(<Greeting message="hey" />)
   expect(container.firstChild).toHaveTextContent('hey')
+})
+
+test('rerender will flush pending hooks effects', async () => {
+  const Component = () => {
+    const [value, setValue] = useState(0)
+    useEffect(() => {
+      const timeoutId = setTimeout(() => setValue(1), 0)
+      return () => clearTimeout(timeoutId)
+    })
+
+    return value
+  }
+
+  const { rerender, findByText } = render(<Component />)
+  rerender(<Component />)
+
+  await findByText('1')
 })
 
 test('hydrate will not update props until next render', () => {

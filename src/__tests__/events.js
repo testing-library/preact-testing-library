@@ -125,15 +125,18 @@ const eventTypes = [
     type: 'Transition',
     events: ['transitionEnd'],
     elementType: 'div'
+  },
+  {
+    type: 'Pointer',
+    events: ['pointerEnter', 'pointerLeave'],
+    elementType: 'div'
   }
 ]
 
-eventTypes.forEach(({
-  type, events, elementType, init
-}) => {
+eventTypes.forEach(({ type, events, elementType, init }) => {
   describe(`${type} Events`, () => {
     events.forEach((eventName) => {
-      const eventProp = `on${eventName.toLowerCase()}`
+      const eventProp = `on${eventName[0].toUpperCase() + eventName.slice(1)}`
 
       it(`triggers ${eventProp}`, () => {
         const ref = createRef()
@@ -146,9 +149,12 @@ eventTypes.forEach(({
           })
         )
 
-        fireEvent[eventName](ref.current, init)
+        expect(fireEvent[eventName](ref.current, init)).toBe(true)
 
         expect(spy).toHaveBeenCalledTimes(1)
+        if (init) {
+          expect(spy).toHaveBeenCalledWith(expect.objectContaining(init))
+        }
       })
     })
   })
@@ -157,28 +163,46 @@ eventTypes.forEach(({
 test('onInput works', () => {
   const handler = jest.fn()
 
-  const { container: { firstChild: input } } = render(
-    (<input type="text" onInput={handler} />)
-  )
+  const {
+    container: { firstChild: input }
+  } = render(<input type="text" onInput={handler} />)
 
-  fireEvent.input(input, { target: { value: 'a' } })
+  const targetProperties = { value: 'a' }
+  const otherProperties = { isComposing: true }
+  const init = {
+    target: targetProperties,
+    ...otherProperties
+  }
+
+  expect(fireEvent.input(input, init)).toBe(true)
 
   expect(handler).toHaveBeenCalledTimes(1)
+  expect(handler).toHaveBeenCalledWith(expect.objectContaining(otherProperties))
 })
 
 test('calling `fireEvent` directly works too', () => {
-  const handleEvent = jest.fn()
+  const handler = jest.fn()
 
+  const {
+    container: { firstChild: button }
+  } = render(<button onClick={handler} />)
+
+  const event = new MouseEvent('click', {
+    bubbles: true,
+    cancelable: true,
+    button: 0
+  })
+
+  expect(fireEvent(button, event)).toBe(true)
+
+  expect(handler).toHaveBeenCalledTimes(1)
+  expect(handler).toHaveBeenCalledWith(event)
+})
+
+test('`fireEvent` returns false when prevented', () => {
   const { container: { firstChild: button } } = render(
-    (<button onClick={handleEvent} />)
+    (<button onClick={(e) => { e.preventDefault() }} />)
   )
 
-  fireEvent(
-    button,
-    new Event('MouseEvent', {
-      bubbles: true,
-      cancelable: true,
-      button: 0
-    })
-  )
+  expect(fireEvent.click(button)).toBe(false)
 })

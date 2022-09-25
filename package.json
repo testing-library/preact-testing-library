@@ -2,8 +2,23 @@
   "name": "@testing-library/preact",
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete Preact DOM testing utilities that encourage good testing practices.",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.mjs",
   "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+			"types": "./types/index.d.ts",
+      "browser": "./dist/esm/index.mjs",
+			"import": "./dist/esm/index.mjs",
+			"require": "./dist/cjs/index.js"
+		},
+		"./pure": {
+			"types": "./pure.d.ts",
+      "browser": "./dist/esm/pure.mjs",
+			"import": "./dist/esm/pure.mjs",
+			"require": "./dist/cjs/pure.js"
+		}
+  },
   "license": "MIT",
   "author": "Rahim Alwer <rahim_alwer@hotmail.com>",
   "homepage": "https://github.com/testing-library/preact-testing-library#readme",
@@ -15,7 +30,7 @@
     "url": "https://github.com/testing-library/preact-testing-library/issues"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12"
   },
   "keywords": [
     "testing",
@@ -33,13 +48,16 @@
     "dist",
     "dont-cleanup-after-each.js",
     "pure.js",
-    "types/index.d.ts"
+    "types/index.d.ts",
+    "pure.d.ts"
   ],
   "scripts": {
     "toc": "doctoc README.md",
     "lint": "eslint src/**/*.js --fix",
     "clean": "rimraf dist",
-    "build": " babel src --out-dir dist --ignore '**/__tests__/**,**/__mocks__/**'",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "babel src --out-dir dist/cjs --config-file ./.babelrc --ignore '**/__tests__/**,**/__mocks__/**'",
+    "build:esm": "babel src --no-babelrc --out-file-extension .mjs --out-dir dist/esm --config-file ./.babelrc.esm.json --ignore '**/__tests__/**,**/__mocks__/**'",
     "test": "jest src/__tests__ ",
     "test:watch": "npm test --watch",
     "test:update": "npm test --updateSnapshot --coverage",
@@ -49,7 +67,7 @@
     "contributors:generate": "all-contributors generate"
   },
   "dependencies": {
-    "@testing-library/dom": "^7.16.2"
+    "@testing-library/dom": "^8.11.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -60,7 +78,7 @@
     "@babel/preset-env": "^7.5.5",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@testing-library/jest-dom": "^5.10.1",
+    "@testing-library/jest-dom": "^5.16.1",
     "@types/jest": "^26.0.0",
     "all-contributors-cli": "^6.9.0",
     "babel-eslint": "^10.0.3",
@@ -75,7 +93,7 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
+    "jest": "^27.0.6",
     "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.11",
     "preact": "^10.0.0-rc.1",
@@ -114,6 +132,7 @@
     ]
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "watchPlugins": [
       "typeahead/filename",
       "typeahead/testname"

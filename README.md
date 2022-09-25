@@ -137,8 +137,8 @@ kind welcome!
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
-[build]: https://travis-ci.org/testing-library/preact-testing-library
-[build-badge]: https://travis-ci.org/testing-library/preact-testing-library.svg?branch=main
+[build]: https://github.com/testing-library/preact-testing-library/actions?query=workflow%3Avalidate
+[build-badge]: https://img.shields.io/github/workflow/status/testing-library/preact-testing-library/validate?logo=github&style=flat-square
 [coverage-badge]: https://img.shields.io/codecov/c/github/testing-library/preact-testing-library.svg?style=flat-square
 [coverage]: https://codecov.io/github/testing-library/preact-testing-library
 [package]: https://www.npmjs.com/package/@testing-library/preact

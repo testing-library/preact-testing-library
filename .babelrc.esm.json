@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": { "node": "12" }
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-transform-react-jsx", { "pragma": "h" }],
+    ["./add-extensions", { "extension": "mjs" }]
+  ]
+}

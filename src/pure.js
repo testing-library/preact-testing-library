@@ -1,6 +1,8 @@
 import { getQueriesForElement, prettyDOM, configure as configureDTL } from '@testing-library/dom'
-import { h, hydrate as preactHydrate, render as preactRender } from 'preact'
-import { act, setupRerender } from 'preact/test-utils'
+import { h, hydrate as preactHydrate, render as preactRender, createRef } from 'preact'
+import { useEffect } from 'preact/hooks'
+import { act } from 'preact/test-utils'
+import { fireEvent } from './fire-event'
 
 configureDTL({
   asyncWrapper: async cb => {
@@ -10,9 +12,9 @@ configureDTL({
     })
     return result
   },
-  eventWrapper: async cb => {
+  eventWrapper: cb => {
     let result
-    await act(() => {
+    act(() => {
       result = cb()
     })
     return result
@@ -69,7 +71,7 @@ function render (
         : console.log(prettyDOM(el, maxLength, options)),
     unmount: () => preactRender(null, container),
     rerender: (rerenderUi) => {
-      setupRerender()()
+      act(() => {})
       render(wrapUiIfNeeded(rerenderUi), { container, baseElement })
       // Intentionally do not return anything to avoid unnecessarily complicating the API.
       // folks can use all the same utilities we return in the first place that are bound to
@@ -106,5 +108,35 @@ function cleanup () {
   mountedContainers.forEach(cleanupAtContainer)
 }
 
+function renderHook (renderCallback, options) {
+  const { initialProps, wrapper } = (options || {})
+  const result = createRef()
+
+  function TestComponent ({ renderCallbackProps }) {
+    const pendingResult = renderCallback(renderCallbackProps)
+
+    useEffect(() => {
+      result.current = pendingResult
+    })
+
+    return null
+  }
+
+  const { rerender: baseRerender, unmount } = render(
+    <TestComponent renderCallbackProps={initialProps} />,
+    { wrapper }
+  )
+
+  function rerender (rerenderCallbackProps) {
+    return baseRerender(
+      <TestComponent renderCallbackProps={rerenderCallbackProps} />
+    )
+  }
+
+  return { result, rerender, unmount }
+}
+
+// eslint-disable-next-line import/export
 export * from '@testing-library/dom'
-export { render, cleanup, act }
+// eslint-disable-next-line import/export
+export { render, cleanup, act, fireEvent, renderHook }
