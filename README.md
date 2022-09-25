@@ -6,7 +6,7 @@
     height="80"
     width="80"
     alt="poodle"
-    src="https://raw.githubusercontent.com/testing-library/preact-testing-library/master/other/poodle.png"
+    src="https://raw.githubusercontent.com/testing-library/preact-testing-library/main/other/poodle.png"
   />
 </a>
 
@@ -145,7 +145,7 @@ kind welcome!
 [version-badge]: https://img.shields.io/npm/v/@testing-library/preact
 [downloads-badge]: https://img.shields.io/npm/dw/@testing-library/preact
 [slack]: https://preact-slack.now.sh
-[license]: https://github.com/testing-library/preact-testing-library/blob/master/LICENSE
+[license]: https://github.com/testing-library/preact-testing-library/blob/main/LICENSE
 [license-badge]: https://img.shields.io/github/license/testing-library/preact-testing-library?color=b
 [emojis]: https://github.com/all-contributors/all-contributors#emoji-key
 [all-contributors]: https://github.com/all-contributors/all-contributors
@@ -159,7 +159,7 @@ kind welcome!
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/testing-library/preact-testing-library/blob/master/CODE_OF_CONDUCT.md
+[coc]: https://github.com/testing-library/preact-testing-library/blob/main/CODE_OF_CONDUCT.md
 [preact-slack]: https://preact-slack.now.sh/
 [preact-slack-badge]: https://preact-slack.now.sh/badge.svg
 [commitzen]: http://commitizen.github.io/cz-cli/
