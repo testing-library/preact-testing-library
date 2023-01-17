@@ -5,7 +5,7 @@ import { cleanup } from './pure'
 // this ensures that tests run in isolation from each other.
 // If you don't like this then either import the `pure` module
 // or set the PTL_SKIP_AUTO_CLEANUP env variable to 'true'.
-if (!process.env.PTL_SKIP_AUTO_CLEANUP) {
+if (typeof process === "undefined" || !process.env.PTL_SKIP_AUTO_CLEANUP) {
   if (typeof afterEach === 'function') {
     afterEach(async () => {
       await cleanup()
