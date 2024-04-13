@@ -11,8 +11,16 @@ Object.keys(domFireEvent).forEach((key) => {
     // we hit the Preact listeners.
     const eventName = `on${key.toLowerCase()}`
     const isInElem = eventName in elem
+    // Preact changes all change events to input events. This is normally handled directly
+    // but when running 'preact/compat' this is done via custom JS which renames the event prop,
+    // making the event name out of sync.
+    // The problematic code is in: preact/compat/src/render.js > handleDomVNode()
+    const keyFiltered = key === 'change' ? 'input' : key
     return isInElem
-      ? domFireEvent[key](elem, init)
-      : domFireEvent(elem, createEvent(key[0].toUpperCase() + key.slice(1), elem, init))
+      ? domFireEvent[keyFiltered](elem, init)
+      : domFireEvent(
+        elem,
+        createEvent(keyFiltered[0].toUpperCase() + keyFiltered.slice(1), elem, init)
+      )
   }
 })
