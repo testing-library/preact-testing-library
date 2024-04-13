@@ -16,6 +16,7 @@ Object.keys(domFireEvent).forEach((key) => {
     // making the event name out of sync.
     // The problematic code is in: preact/compat/src/render.js > handleDomVNode()
     const keyFiltered = key === 'change' ? 'input' : key
+
     return isInElem
       ? domFireEvent[keyFiltered](elem, init)
       : domFireEvent(
