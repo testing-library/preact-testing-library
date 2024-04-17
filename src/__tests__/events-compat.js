@@ -1,6 +1,6 @@
 import { h } from 'preact' // required by render
 import { fireEvent, render } from '..'
-import from 'preact/compat'
+import 'preact/compat'
 
 test('calling `fireEvent` with `preact/compat` and onChange works too', () => {
   const handler = jest.fn()

@@ -30,7 +30,7 @@ const eventTypes = [
   },
   {
     type: 'Focus',
-    events: ['input', 'invalid'],
+    events: ['input', 'invalid', 'change'],
     elementType: 'input'
   },
   {

@@ -1,4 +1,19 @@
 import { fireEvent as domFireEvent, createEvent } from '@testing-library/dom'
+import { options } from 'preact'
+
+let isCompat = false
+
+//  Detects if preact/compat is used
+const oldHook = options.vnode
+options.vnode = (vnode) => {
+  if (vnode.$$typeof) isCompat = true
+  if (oldHook) oldHook(vnode)
+}
+
+//  Renames event to match React (preact/compat) version
+const renameEventCompat = (key) => {
+  return key === 'change' ? 'input' : key
+}
 
 // Similar to RTL we make are own fireEvent helper that just calls DTL's fireEvent with that
 // we can that any specific behaviors to the helpers we need
@@ -11,11 +26,10 @@ Object.keys(domFireEvent).forEach((key) => {
     // we hit the Preact listeners.
     const eventName = `on${key.toLowerCase()}`
     const isInElem = eventName in elem
-    // Preact changes all change events to input events. This is normally handled directly
-    // but when running 'preact/compat' this is done via custom JS which renames the event prop,
+    // Preact changes all change events to input events when running 'preact/compat',
     // making the event name out of sync.
     // The problematic code is in: preact/compat/src/render.js > handleDomVNode()
-    const keyFiltered = key === 'change' ? 'input' : key
+    const keyFiltered = !isCompat ? key : renameEventCompat(key)
 
     return isInElem
       ? domFireEvent[keyFiltered](elem, init)
