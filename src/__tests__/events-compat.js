@@ -1,14 +1,12 @@
 import { h } from 'preact' // required by render
 import { fireEvent, render } from '..'
-import { forwardRef } from 'preact/compat' // required for this test to make sense
+import from 'preact/compat'
 
 test('calling `fireEvent` with `preact/compat` and onChange works too', () => {
   const handler = jest.fn()
 
-  // forwardRef needs to be imported from preact/compat for this test to make sense.
-  // Preact behavior when using onChange is described here:
-  // https://preactjs.com/guide/v10/differences-to-react#use-oninput-instead-of-onchange
-  // We want to test if onChange event gets caught with fireEvent.change()
+  // Preact only matches React's aliasing of `onChange` when `preact/compat` is used
+  // This test ensures this is supported properly with `fireEvent.change()`
   const {
     container: { firstChild: input }
   } = render(<input type="text" onChange={handler} />)
