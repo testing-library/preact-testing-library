@@ -30,7 +30,7 @@ const eventTypes = [
   },
   {
     type: 'Focus',
-    events: ['input', 'invalid'],
+    events: ['input', 'invalid', 'change'],
     elementType: 'input'
   },
   {
@@ -200,8 +200,14 @@ test('calling `fireEvent` directly works too', () => {
 })
 
 test('`fireEvent` returns false when prevented', () => {
-  const { container: { firstChild: button } } = render(
-    (<button onClick={(e) => { e.preventDefault() }} />)
+  const {
+    container: { firstChild: button }
+  } = render(
+    <button
+      onClick={(e) => {
+        e.preventDefault()
+      }}
+    />
   )
 
   expect(fireEvent.click(button)).toBe(false)
