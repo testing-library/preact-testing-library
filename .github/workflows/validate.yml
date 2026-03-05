@@ -33,8 +33,17 @@ jobs:
         with:
           useLockFile: false
 
-      - name: ▶️ Run validate script
-        run: npm run validate
+      - name: 🧹 Run lint script
+        run: npm run lint
+
+      - name: 🧪 Run tests with coverage
+        run: npm test -- --coverage
+
+      - name: 🧼 Run clean script
+        run: npm run clean
+
+      - name: 🏗 Run build script
+        run: npm run build
 
       - name: ⬆️ Upload coverage report
         uses: codecov/codecov-action@v5
