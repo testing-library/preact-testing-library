@@ -23,3 +23,23 @@ test('calling `fireEvent` with `preact/compat` and onChange works too', () => {
   expect(handler).toHaveBeenCalledTimes(1)
   expect(handler).toHaveBeenCalledWith(expect.objectContaining(otherProperties))
 })
+
+test('should not alias `change` event to `input` for file, checkbox, or radio inputs', () => {
+  for (const type of ['file', 'checkbox', 'radio']) {
+    const inputHandler = jest.fn()
+    const changeHandler = jest.fn()
+
+    const {
+      container: { firstChild: input }
+    } = render(<input type={type} onChange={changeHandler} onInput={inputHandler} />)
+
+    fireEvent.change(input, {
+      target: input.type === 'file'
+        ? { files: [new File(['Hello World!'], 'foo.txt')] }
+        : { checked: true }
+    })
+
+    expect(inputHandler).toHaveBeenCalledTimes(0)
+    expect(changeHandler).toHaveBeenCalledTimes(1)
+  }
+})

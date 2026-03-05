@@ -10,9 +10,19 @@ options.vnode = (vnode) => {
   if (oldHook) oldHook(vnode)
 }
 
-//  Renames event to match React (preact/compat) version
-const renameEventCompat = (key) => {
-  return key === 'change' ? 'input' : key
+// Matches the behavior of `preact/compat`:
+// https://github.com/preactjs/preact/blob/2459326755dea9ad6184b42bda1128c5004b8544/compat/src/render.js#L173-L175
+// https://github.com/preactjs/preact/blob/2459326755dea9ad6184b42bda1128c5004b8544/compat/src/render.js#L36-L37
+const maybeAliasKey = (key, elem) => {
+  if (
+    key === 'change' &&
+    (elem.tagName === 'INPUT' || elem.tagName === 'TEXTAREA') &&
+    !/fil|che|rad/.test(elem.type)
+  ) {
+    return 'input'
+  }
+
+  return key;
 }
 
 // Similar to RTL we make are own fireEvent helper that just calls DTL's fireEvent with that
@@ -26,16 +36,15 @@ Object.keys(domFireEvent).forEach((key) => {
     // we hit the Preact listeners.
     const eventName = `on${key.toLowerCase()}`
     const isInElem = eventName in elem
-    // Preact changes all change events to input events when running 'preact/compat',
-    // making the event name out of sync.
-    // The problematic code is in: preact/compat/src/render.js > handleDomVNode()
-    const keyFiltered = !isCompat ? key : renameEventCompat(key)
+
+    // Preact aliases some change events when using `preact/compat` to mirror React's behavior
+    const maybeAliasedKey = !isCompat ? key : maybeAliasKey(key, elem)
 
     return isInElem
-      ? domFireEvent[keyFiltered](elem, init)
+      ? domFireEvent[maybeAliasedKey](elem, init)
       : domFireEvent(
         elem,
-        createEvent(keyFiltered[0].toUpperCase() + keyFiltered.slice(1), elem, init)
+        createEvent(maybeAliasedKey[0].toUpperCase() + maybeAliasedKey.slice(1), elem, init)
       )
   }
 })
