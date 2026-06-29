@@ -60,3 +60,16 @@ test('allows wrapper components', async () => {
 
   expect(result.current).toEqual('provided')
 })
+
+test('forwards render options to render', () => {
+  const container = document.createElement('div')
+  document.body.appendChild(container)
+
+  function Wrapper ({ children }) {
+    return <div data-testid="marker">{children}</div>
+  }
+
+  renderHook(() => null, { container, wrapper: Wrapper })
+
+  expect(container.querySelector('[data-testid="marker"]')).not.toBeNull()
+})
