@@ -67,7 +67,7 @@
     "contributors:generate": "all-contributors generate"
   },
   "dependencies": {
-    "@testing-library/dom": "^8.11.1"
+    "@testing-library/dom": "^10.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
