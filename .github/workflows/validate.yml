@@ -1,34 +1,30 @@
 name: validate
 on:
-  push:
-    branches:
-      - '+([0-9])?(.{+([0-9]),x}).x'
-      - 'main'
-      - 'next'
-      - 'next-major'
-      - 'beta'
-      - 'alpha'
-      - '!all-contributors/**'
   pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   main:
+    permissions:
+      contents: read # to fetch code (actions/checkout)
     # ignore all-contributors PRs
     if: ${{ !contains(github.head_ref, 'all-contributors') }}
     strategy:
+      fail-fast: false
       matrix:
-        node: [16, 18, 20]
+        node: [20, 22, 24]
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
@@ -36,54 +32,22 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
-        env:
-          HUSKY_SKIP_INSTALL: true
 
-      - name: ▶️ Run validate script
-        run: npm run validate
+      - name: 🧹 Run lint script
+        run: npm run lint
 
-      - name: ⬆️ Upload coverage report
-        uses: codecov/codecov-action@v2
+      - name: 🧪 Run tests with coverage
+        run: npm test -- --coverage
 
-  release:
-    needs: main
-    runs-on: ubuntu-latest
-    if:
-      ${{ github.repository == 'testing-library/preact-testing-library' &&
-      contains('refs/heads/main,refs/heads/beta,refs/heads/next,refs/heads/alpha', github.ref) &&
-      github.event_name == 'push' }}
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-        env:
-          HUSKY_SKIP_INSTALL: true
+      - name: 🧼 Run clean script
+        run: npm run clean
 
       - name: 🏗 Run build script
         run: npm run build
 
-      - name: 🚀 Release
-        uses: cycjimmy/semantic-release-action@v2
+      - name: ⬆️ Upload coverage report
+        uses: codecov/codecov-action@v5
         with:
-          semantic_version: 17
-          branches: |
-            [
-              '+([0-9])?(.{+([0-9]),x}).x',
-              'main',
-              'next',
-              'next-major',
-              {name: 'beta', prerelease: true},
-              {name: 'alpha', prerelease: true}
-            ]
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          fail_ci_if_error: false # Temp because token is invalid
+          flags: node-${{ matrix.node }}
+          token: ${{ secrets.CODECOV_TOKEN }}
