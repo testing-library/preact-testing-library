@@ -1,7 +1,22 @@
 import { fireEvent as domFireEvent, createEvent } from '@testing-library/dom'
-import { options } from 'preact'
+import { h, options, render } from 'preact'
 
 let isCompat = false
+let alwaysLowercase
+
+// Preact 10 only lowercases `onTouchStart` when the element has an `ontouchstart`
+// property, otherwise it listens for `TouchStart`. Preact 11 always lowercases.
+// Probe once which behavior the installed Preact has.
+const lowercasesEvents = (elem) => {
+  if (alwaysLowercase === undefined) {
+    const root = elem.ownerDocument.createElement('div')
+    alwaysLowercase = false
+    render(h('i', { onPtlProbe: () => { alwaysLowercase = true } }), root)
+    root.firstChild.dispatchEvent(new root.ownerDocument.defaultView.Event('ptlprobe'))
+    render(null, root)
+  }
+  return alwaysLowercase
+}
 
 //  Detects if preact/compat is used
 const oldHook = options.vnode
@@ -34,8 +49,14 @@ Object.keys(domFireEvent).forEach((key) => {
     // Preact registers event-listeners in lower-case, so onPointerStart becomes pointerStart
     // here we will copy this behavior, when we fire an element we will fire it in lowercase so
     // we hit the Preact listeners.
+    // Preact 10 always lowercases onFocusIn/onFocusOut, and `preact/compat` lowercases
+    // onAnimation*, onTransition*, onTouch*, onBeforeInput and onComposition* props itself.
     const eventName = `on${key.toLowerCase()}`
-    const isInElem = eventName in elem
+    const isInElem =
+      eventName in elem ||
+      /^focus(In|Out)$/.test(key) ||
+      (isCompat && /^(ani|tra|tou|beforeInp|compo)/.test(key)) ||
+      lowercasesEvents(elem)
 
     // Preact aliases some change events when using `preact/compat` to mirror React's behavior
     const maybeAliasedKey = !isCompat ? key : maybeAliasKey(key, elem)
