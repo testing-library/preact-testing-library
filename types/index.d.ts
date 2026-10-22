@@ -1,6 +1,6 @@
 import { queries, Queries, BoundFunction } from '@testing-library/dom'
 import { act as preactAct } from 'preact/test-utils'
-import { ComponentChild, ComponentType } from 'preact'
+import { ComponentChild, ComponentChildren, ComponentType } from 'preact'
 
 export * from '@testing-library/dom'
 
@@ -81,7 +81,7 @@ export interface RenderHookOptions<Props> {
    *
    *  @see https://testing-library.com/docs/react-testing-library/api/#wrapper
    */
-  wrapper?: ComponentType<{ children: Element }>
+  wrapper?: ComponentType<{ children?: ComponentChildren }>
 }
 
 /**
