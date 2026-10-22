@@ -49,8 +49,14 @@ Object.keys(domFireEvent).forEach((key) => {
     // Preact registers event-listeners in lower-case, so onPointerStart becomes pointerStart
     // here we will copy this behavior, when we fire an element we will fire it in lowercase so
     // we hit the Preact listeners.
+    // Preact 10 always lowercases onFocusIn/onFocusOut, and `preact/compat` lowercases
+    // onAnimation*, onTransition*, onTouch*, onBeforeInput and onComposition* props itself.
     const eventName = `on${key.toLowerCase()}`
-    const isInElem = eventName in elem || lowercasesEvents(elem)
+    const isInElem =
+      eventName in elem ||
+      /^focus(In|Out)$/.test(key) ||
+      (isCompat && /^(ani|tra|tou|beforeInp|compo)/.test(key)) ||
+      lowercasesEvents(elem)
 
     // Preact aliases some change events when using `preact/compat` to mirror React's behavior
     const maybeAliasedKey = !isCompat ? key : maybeAliasKey(key, elem)

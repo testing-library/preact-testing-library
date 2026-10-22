@@ -43,3 +43,20 @@ test('should not alias `change` event to `input` for file, checkbox, or radio in
     expect(changeHandler).toHaveBeenCalledTimes(1)
   }
 })
+
+test('fires events whose handler names `preact/compat` lowercases', () => {
+  const events = ['animationEnd', 'transitionEnd', 'touchStart', 'compositionEnd']
+
+  for (const event of events) {
+    const handler = jest.fn()
+    const prop = `on${event[0].toUpperCase()}${event.slice(1)}`
+
+    const {
+      container: { firstChild: input }
+    } = render(<input {...{ [prop]: handler }} />)
+
+    fireEvent[event](input)
+
+    expect(handler).toHaveBeenCalledTimes(1)
+  }
+})
