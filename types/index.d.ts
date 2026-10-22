@@ -9,7 +9,7 @@ export type RenderResult<Q extends Queries = typeof queries> = {
   baseElement: Element
   debug: (baseElement?: Element | DocumentFragment) => void
   rerender: (ui: ComponentChild) => void
-  unmount: () => boolean
+  unmount: () => void
   asFragment: () => DocumentFragment
 } & { [P in keyof Q]: BoundFunction<Q[P]> }
 
