@@ -17,7 +17,7 @@ export interface RenderOptions<Q extends Queries = typeof queries> {
   container?: Element
   baseElement?: Element
   queries?: Q
-  wrapper?: ComponentChild
+  wrapper?: ComponentType<{ children: Element }>
 }
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
